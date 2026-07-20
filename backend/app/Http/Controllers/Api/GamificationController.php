@@ -74,6 +74,39 @@ class GamificationController extends Controller
         ]);
     }
 
+    public function streakCalendar(Request $request): JsonResponse
+    {
+        $calendar = $this->streakService->getStreakCalendar($request->user());
+
+        return response()->json([
+            'success' => true,
+            'data' => $calendar,
+        ]);
+    }
+
+    public function useFreeze(Request $request): JsonResponse
+    {
+        $result = $this->streakService->useFreeze($request->user());
+
+        return response()->json([
+            'success' => $result['success'],
+            'message' => $result['message'],
+            'data' => [
+                'streak' => $result['streak'] ?? null,
+            ],
+        ]);
+    }
+
+    public function freezeStatus(Request $request): JsonResponse
+    {
+        $status = $this->streakService->getFreezeStatus($request->user());
+
+        return response()->json([
+            'success' => true,
+            'data' => $status,
+        ]);
+    }
+
     public function checkIn(Request $request): JsonResponse
     {
         $result = $this->streakService->checkIn($request->user());

@@ -13,16 +13,21 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { label: 'Dashboard', href: '/dashboard/student', icon: '📊', roles: ['siswa', 'admin'] },
+  { label: 'Dashboard', href: '/dashboard/admin', icon: '📊', roles: ['admin'] },
   { label: 'Dashboard', href: '/dashboard/teacher', icon: '📊', roles: ['guru'] },
+  { label: 'Dashboard', href: '/dashboard/student', icon: '📊', roles: ['siswa'] },
   { label: 'Materi', href: '/materials', icon: '📚', roles: ['siswa', 'guru', 'admin'] },
   { label: 'Tugas', href: '/assignments', icon: '📝', roles: ['siswa', 'guru', 'admin'] },
   { label: 'Periksa Tugas', href: '/submissions', icon: '✅', roles: ['guru'] },
   { label: 'Quest', href: '/quests', icon: '🎯', roles: ['siswa', 'admin'] },
   { label: 'Badge', href: '/badges', icon: '🏆', roles: ['siswa', 'admin'] },
   { label: 'Leaderboard', href: '/leaderboard', icon: '🏅', roles: ['siswa', 'guru', 'admin'] },
+  { label: 'Riwayat XP', href: '/xp-history', icon: '⭐', roles: ['siswa'] },
+  { label: 'Liga', href: '/league', icon: '🏆', roles: ['siswa'] },
+  { label: 'Guild', href: '/guild', icon: '🛡️', roles: ['siswa'] },
   { label: 'Manajemen User', href: '/admin/users', icon: '👥', roles: ['admin'] },
   { label: 'Manajemen Sekolah', href: '/admin/schools', icon: '🏫', roles: ['admin'] },
+  { label: 'Kelas & Penugasan', href: '/admin/classes', icon: '📋', roles: ['admin'] },
 ];
 
 export default function Sidebar() {

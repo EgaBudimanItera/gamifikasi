@@ -12,7 +12,7 @@ class ClassSubject extends Model
 
     protected $table = 'class_subject';
 
-    protected $fillable = ['class_id', 'subject_id', 'user_id'];
+    protected $fillable = ['class_id', 'subject_id', 'user_id', 'semester'];
 
     public function class(): BelongsTo
     {

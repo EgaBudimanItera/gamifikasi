@@ -39,6 +39,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('my-subjects', [\App\Http\Controllers\Api\ClassSubjectController::class, 'mySubjects']);
     });
 
+    // Admin Dashboard
+    Route::get('dashboard/admin', [\App\Http\Controllers\Api\DashboardController::class, 'admin']);
+
     // Submissions - accessible by all (controller filters by role)
     Route::get('assignments/{assignment}/submissions', [\App\Http\Controllers\Api\SubmissionController::class, 'index']);
 
@@ -62,6 +65,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('gamification/xp-logs', [\App\Http\Controllers\Api\GamificationController::class, 'xpLogs']);
     Route::get('gamification/my-badges', [\App\Http\Controllers\Api\GamificationController::class, 'myBadges']);
     Route::get('gamification/streak', [\App\Http\Controllers\Api\GamificationController::class, 'streak']);
+    Route::get('gamification/streak/calendar', [\App\Http\Controllers\Api\GamificationController::class, 'streakCalendar']);
+    Route::get('gamification/streak/freeze-status', [\App\Http\Controllers\Api\GamificationController::class, 'freezeStatus']);
+    Route::post('gamification/streak/freeze', [\App\Http\Controllers\Api\GamificationController::class, 'useFreeze']);
     Route::post('gamification/streak/check-in', [\App\Http\Controllers\Api\GamificationController::class, 'checkIn']);
     Route::get('gamification/my-quests', [\App\Http\Controllers\Api\GamificationController::class, 'myQuests']);
 
@@ -84,4 +90,19 @@ Route::middleware('auth:sanctum')->group(function () {
     // Challenges
     Route::get('challenges/daily', [\App\Http\Controllers\Api\ChallengeController::class, 'daily']);
     Route::get('challenges/weekly', [\App\Http\Controllers\Api\ChallengeController::class, 'weekly']);
+
+    // League System
+    Route::get('league/my', [\App\Http\Controllers\Api\LeagueController::class, 'myLeague']);
+    Route::get('league/standings', [\App\Http\Controllers\Api\LeagueController::class, 'standings']);
+    Route::get('league/history', [\App\Http\Controllers\Api\LeagueController::class, 'history']);
+    Route::get('league/my-standing', [\App\Http\Controllers\Api\LeagueController::class, 'myLeagueStanding']);
+
+    // Guild / Team System
+    Route::get('guild/my', [\App\Http\Controllers\Api\GuildController::class, 'myGuild']);
+    Route::post('guild', [\App\Http\Controllers\Api\GuildController::class, 'create']);
+    Route::post('guild/{guildId}/join', [\App\Http\Controllers\Api\GuildController::class, 'join']);
+    Route::post('guild/leave', [\App\Http\Controllers\Api\GuildController::class, 'leave']);
+    Route::get('guild/available', [\App\Http\Controllers\Api\GuildController::class, 'available']);
+    Route::get('guild/leaderboard', [\App\Http\Controllers\Api\GuildController::class, 'leaderboard']);
+    Route::get('guild/{guildId}/members', [\App\Http\Controllers\Api\GuildController::class, 'members']);
 });

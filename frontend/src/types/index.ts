@@ -104,6 +104,141 @@ export interface TeacherDashboard {
   teachings: Teaching[];
 }
 
+export interface XpLog {
+  id: number;
+  user_id: number;
+  user_profile_id: number;
+  amount: number;
+  type: 'assignment' | 'login' | 'streak' | 'quest' | 'penalty';
+  description: string;
+  reference_id: number | null;
+  reference_type: string | null;
+  created_at: string;
+}
+
+export interface League {
+  id: number;
+  name: string;
+  tier: string;
+  order: number;
+  icon: string;
+  color: string;
+  min_xp: number;
+  max_xp: number;
+  promote_count: number;
+  demote_count: number;
+}
+
+export interface UserLeague {
+  id: number;
+  user_id: number;
+  league_id: number;
+  week_start: string;
+  week_end: string;
+  weekly_xp: number;
+  rank: number | null;
+  status: 'active' | 'promoted' | 'demoted';
+  league?: League;
+  user?: User;
+}
+
+export interface LeagueStanding {
+  league: League;
+  players: {
+    user_id: number;
+    name: string;
+    weekly_xp: number;
+    rank: number | null;
+    status: string;
+  }[];
+}
+
+export interface LeagueData {
+  week_start: string;
+  week_end: string;
+  leagues: LeagueStanding[];
+}
+
+export interface MyLeagueStanding {
+  league: League;
+  rank: number;
+  total_players: number;
+  weekly_xp: number;
+  status: string;
+  week_start: string;
+  week_end: string;
+}
+
+export interface GuildMember {
+  id: number;
+  guild_id: number;
+  user_id: number;
+  role: 'leader' | 'member';
+  contributed_xp: number;
+  user?: User;
+}
+
+export interface Guild {
+  id: number;
+  name: string;
+  description: string | null;
+  icon: string;
+  leader_id: number;
+  class_id: number | null;
+  total_guild_xp: number;
+  max_members: number;
+  members?: GuildMember[];
+  leader?: User;
+  members_count?: number;
+}
+
+export interface School {
+  id: number;
+  name: string;
+  address: string | null;
+  phone: string | null;
+  email: string | null;
+}
+
+export interface AcademicYear {
+  id: number;
+  school_id: number;
+  name: string;
+  start_date: string;
+  end_date: string;
+  is_active: boolean;
+}
+
+export interface Class {
+  id: number;
+  school_id: number;
+  academic_year_id: number;
+  name: string;
+  grade_level: number;
+  academic_year?: AcademicYear;
+  students_count?: number;
+  class_subjects?: ClassSubject[];
+}
+
+export interface Subject {
+  id: number;
+  school_id: number;
+  name: string;
+  code: string;
+  description: string | null;
+}
+
+export interface ClassSubject {
+  id: number;
+  class_id: number;
+  subject_id: number;
+  user_id: number;
+  semester: 'ganjil' | 'genap' | null;
+  class?: Class;
+  subject?: Subject;
+  teacher?: User;
+}
+
 export interface PaginatedResponse<T> {
   data: T[];
   meta: {

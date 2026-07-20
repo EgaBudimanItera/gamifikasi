@@ -600,5 +600,77 @@ class DatabaseSeeder extends Seeder
             config_path('gamification-rules.json'),
             json_encode($rules, JSON_PRETTY_PRINT)
         );
+
+        // =====================================================================
+        // 17. LEAGUES
+        // =====================================================================
+
+        DB::table('leagues')->insert([
+            ['name' => 'Perunggu',  'tier' => 'bronze',   'order' => 1,  'icon' => '🥉', 'color' => 'from-amber-600 to-amber-800',  'min_xp' => 0,    'max_xp' => 99,    'promote_count' => 5, 'demote_count' => 0, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Perak',     'tier' => 'silver',   'order' => 2,  'icon' => '🥈', 'color' => 'from-gray-400 to-gray-600',   'min_xp' => 100,  'max_xp' => 299,   'promote_count' => 5, 'demote_count' => 3, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Emas',      'tier' => 'gold',     'order' => 3,  'icon' => '🥇', 'color' => 'from-yellow-400 to-yellow-600', 'min_xp' => 300,  'max_xp' => 599, 'promote_count' => 5, 'demote_count' => 3, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Safir',     'tier' => 'sapphire', 'order' => 4,  'icon' => '💎', 'color' => 'from-blue-400 to-blue-600',   'min_xp' => 600,  'max_xp' => 999,   'promote_count' => 5, 'demote_count' => 3, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Ruby',      'tier' => 'ruby',     'order' => 5,  'icon' => '🔴', 'color' => 'from-red-400 to-red-600',     'min_xp' => 1000, 'max_xp' => 1499,  'promote_count' => 5, 'demote_count' => 3, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Zamrud',    'tier' => 'emerald',  'order' => 6,  'icon' => '🟢', 'color' => 'from-emerald-400 to-emerald-600', 'min_xp' => 1500, 'max_xp' => 2499, 'promote_count' => 5, 'demote_count' => 3, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Amethyst',  'tier' => 'amethyst', 'order' => 7,  'icon' => '🟣', 'color' => 'from-purple-400 to-purple-600', 'min_xp' => 2500, 'max_xp' => 3999, 'promote_count' => 5, 'demote_count' => 3, 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Diamant',   'tier' => 'diamond',  'order' => 8,  'icon' => '💠', 'color' => 'from-cyan-300 to-cyan-500',  'min_xp' => 4000, 'max_xp' => 99999, 'promote_count' => 3, 'demote_count' => 5, 'created_at' => now(), 'updated_at' => now()],
+        ]);
+
+        // =====================================================================
+        // 18. USER LEAGUES (current week assignments)
+        // =====================================================================
+
+        $weekStart = now()->startOfWeek(\Carbon\Carbon::MONDAY)->toDateString();
+        $weekEnd = now()->endOfWeek(\Carbon\Carbon::SUNDAY)->toDateString();
+
+        DB::table('user_leagues')->insert([
+            ['user_id' => 3, 'league_id' => 7, 'week_start' => $weekStart, 'week_end' => $weekEnd, 'weekly_xp' => 2850, 'rank' => 1, 'status' => 'active', 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 4, 'league_id' => 6, 'week_start' => $weekStart, 'week_end' => $weekEnd, 'weekly_xp' => 1820, 'rank' => 1, 'status' => 'active', 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 5, 'league_id' => 5, 'week_start' => $weekStart, 'week_end' => $weekEnd, 'weekly_xp' => 950,  'rank' => 2, 'status' => 'active', 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 6, 'league_id' => 4, 'week_start' => $weekStart, 'week_end' => $weekEnd, 'weekly_xp' => 520,  'rank' => 1, 'status' => 'active', 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 7, 'league_id' => 3, 'week_start' => $weekStart, 'week_end' => $weekEnd, 'weekly_xp' => 380,  'rank' => 1, 'status' => 'active', 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 8, 'league_id' => 2, 'week_start' => $weekStart, 'week_end' => $weekEnd, 'weekly_xp' => 120,  'rank' => 1, 'status' => 'active', 'created_at' => now(), 'updated_at' => now()],
+        ]);
+
+        // Also add a previous week's data for history
+        $prevWeekStart = now()->subWeek()->startOfWeek(\Carbon\Carbon::MONDAY)->toDateString();
+        $prevWeekEnd = now()->subWeek()->endOfWeek(\Carbon\Carbon::SUNDAY)->toDateString();
+
+        DB::table('user_leagues')->insert([
+            ['user_id' => 3, 'league_id' => 6, 'week_start' => $prevWeekStart, 'week_end' => $prevWeekEnd, 'weekly_xp' => 450, 'rank' => 2, 'status' => 'promoted', 'created_at' => now()->subWeek(), 'updated_at' => now()->subWeek()],
+            ['user_id' => 4, 'league_id' => 5, 'week_start' => $prevWeekStart, 'week_end' => $prevWeekEnd, 'weekly_xp' => 320, 'rank' => 1, 'status' => 'promoted', 'created_at' => now()->subWeek(), 'updated_at' => now()->subWeek()],
+            ['user_id' => 5, 'league_id' => 4, 'week_start' => $prevWeekStart, 'week_end' => $prevWeekEnd, 'weekly_xp' => 180, 'rank' => 3, 'status' => 'active',    'created_at' => now()->subWeek(), 'updated_at' => now()->subWeek()],
+            ['user_id' => 6, 'league_id' => 3, 'week_start' => $prevWeekStart, 'week_end' => $prevWeekEnd, 'weekly_xp' => 90,  'rank' => 2, 'status' => 'active',    'created_at' => now()->subWeek(), 'updated_at' => now()->subWeek()],
+            ['user_id' => 7, 'league_id' => 2, 'week_start' => $prevWeekStart, 'week_end' => $prevWeekEnd, 'weekly_xp' => 40,  'rank' => 1, 'status' => 'demoted',   'created_at' => now()->subWeek(), 'updated_at' => now()->subWeek()],
+            ['user_id' => 8, 'league_id' => 1, 'week_start' => $prevWeekStart, 'week_end' => $prevWeekEnd, 'weekly_xp' => 10,  'rank' => 1, 'status' => 'active',    'created_at' => now()->subWeek(), 'updated_at' => now()->subWeek()],
+        ]);
+
+        // =====================================================================
+        // 19. GUILDS
+        // =====================================================================
+
+        DB::table('guilds')->insert([
+            [
+                'id' => 1, 'name' => 'Code Warriors', 'description' => 'Tim pemrograman yang suka tantangan!',
+                'icon' => '⚔️', 'leader_id' => 3, 'class_id' => 2,
+                'total_guild_xp' => 4670, 'max_members' => 5,
+                'created_at' => now()->subMonths(2), 'updated_at' => now(),
+            ],
+            [
+                'id' => 2, 'name' => 'Data Dragons', 'description' => 'Ahli basis data dan analisis',
+                'icon' => '🐉', 'leader_id' => 6, 'class_id' => 3,
+                'total_guild_xp' => 900, 'max_members' => 5,
+                'created_at' => now()->subMonths(1), 'updated_at' => now(),
+            ],
+        ]);
+
+        DB::table('guild_members')->insert([
+            // Code Warriors
+            ['guild_id' => 1, 'user_id' => 3, 'role' => 'leader', 'contributed_xp' => 2850, 'created_at' => now()->subMonths(2), 'updated_at' => now()],
+            ['guild_id' => 1, 'user_id' => 4, 'role' => 'member', 'contributed_xp' => 1820, 'created_at' => now()->subMonths(2), 'updated_at' => now()],
+            // Data Dragons
+            ['guild_id' => 2, 'user_id' => 6, 'role' => 'leader', 'contributed_xp' => 520, 'created_at' => now()->subMonths(1), 'updated_at' => now()],
+            ['guild_id' => 2, 'user_id' => 7, 'role' => 'member', 'contributed_xp' => 380, 'created_at' => now()->subMonths(1), 'updated_at' => now()],
+        ]);
     }
 }

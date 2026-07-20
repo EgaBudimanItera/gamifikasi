@@ -44,6 +44,7 @@ export const authApi = {
 export const dashboardApi = {
   teacher: () => api.get('/dashboard/teacher'),
   student: () => api.get('/dashboard/student'),
+  admin: () => api.get('/dashboard/admin'),
 };
 
 export const gamificationApi = {
@@ -51,6 +52,9 @@ export const gamificationApi = {
   xpLogs: (page = 1) => api.get(`/gamification/xp-logs?page=${page}`),
   myBadges: () => api.get('/gamification/my-badges'),
   streak: () => api.get('/gamification/streak'),
+  streakCalendar: () => api.get('/gamification/streak/calendar'),
+  freezeStatus: () => api.get('/gamification/streak/freeze-status'),
+  useFreeze: () => api.post('/gamification/streak/freeze'),
   checkIn: () => api.post('/gamification/streak/check-in'),
   myQuests: (page = 1) => api.get(`/gamification/my-quests?page=${page}`),
   notifications: (page = 1) => api.get(`/notifications?page=${page}`),
@@ -101,6 +105,54 @@ export const badgeApi = {
 export const questApi = {
   list: (page = 1) => api.get(`/quests?page=${page}`),
   accept: (id: number) => api.post(`/quests/${id}/accept`),
+};
+
+export const leagueApi = {
+  myLeague: () => api.get('/league/my'),
+  standings: () => api.get('/league/standings'),
+  history: () => api.get('/league/history'),
+  myStanding: () => api.get('/league/my-standing'),
+};
+
+export const classApi = {
+  list: (params?: Record<string, any>) => api.get('/classes', { params }),
+  get: (id: number) => api.get(`/classes/${id}`),
+  create: (data: any) => api.post('/classes', data),
+  update: (id: number, data: any) => api.put(`/classes/${id}`, data),
+  delete: (id: number) => api.delete(`/classes/${id}`),
+  students: (id: number) => api.get(`/classes/${id}/students`),
+  subjects: (id: number) => api.get(`/classes/${id}/subjects`),
+};
+
+export const subjectApi = {
+  list: (params?: Record<string, any>) => api.get('/subjects', { params }),
+  get: (id: number) => api.get(`/subjects/${id}`),
+  create: (data: any) => api.post('/subjects', data),
+  update: (id: number, data: any) => api.put(`/subjects/${id}`, data),
+  delete: (id: number) => api.delete(`/subjects/${id}`),
+};
+
+export const classSubjectApi = {
+  list: (params?: Record<string, any>) => api.get('/class-subject-assignments', { params }),
+  get: (id: number) => api.get(`/class-subject-assignments/${id}`),
+  create: (data: any) => api.post('/class-subject-assignments', data),
+  update: (id: number, data: any) => api.put(`/class-subject-assignments/${id}`, data),
+  delete: (id: number) => api.delete(`/class-subject-assignments/${id}`),
+};
+
+export const userApi = {
+  list: (params?: Record<string, any>) => api.get('/users', { params }),
+};
+
+export const guildApi = {
+  myGuild: () => api.get('/guild/my'),
+  create: (data: { name: string; description?: string; icon?: string; class_id?: number }) =>
+    api.post('/guild', data),
+  join: (guildId: number) => api.post(`/guild/${guildId}/join`),
+  leave: () => api.post('/guild/leave'),
+  available: () => api.get('/guild/available'),
+  leaderboard: () => api.get('/guild/leaderboard'),
+  members: (guildId: number) => api.get(`/guild/${guildId}/members`),
 };
 
 export default api;

@@ -12,6 +12,9 @@ use App\Models\UserProfile;
 use App\Models\UserQuest;
 use App\Models\XpLog;
 use App\Models\ClassSubject;
+use App\Models\Material;
+use App\Models\Subject;
+use App\Models\Submission;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
@@ -124,6 +127,63 @@ class DashboardController extends Controller
                 'score_average' => round($scoreAverage, 2),
                 'total_badges' => $totalBadges,
                 'active_quests' => $activeQuests,
+            ],
+        ]);
+    }
+
+    public function admin(Request $request): JsonResponse
+    {
+        $schoolId = $request->user()->school_id;
+
+        $totalStudents = User::where('role_id', 3)->where('school_id', $schoolId)->count();
+        $totalTeachers = User::where('role_id', 2)->where('school_id', $schoolId)->count();
+        $totalClasses = ClassModel::where('school_id', $schoolId)->count();
+        $totalSubjects = Subject::where('school_id', $schoolId)->count();
+        $totalAssignments = Assignment::count();
+        $totalMaterials = Material::count();
+        $totalSubmissions = Submission::count();
+
+        $totalXp = UserProfile::sum('total_xp');
+        $avgLevel = UserProfile::avg('current_level') ?? 1;
+        $avgStreak = UserProfile::avg('current_streak') ?? 0;
+
+        $topStudents = UserProfile::with('user')
+            ->orderBy('total_xp', 'desc')
+            ->limit(5)
+            ->get()
+            ->map(fn($p) => [
+                'name' => $p->user?->name ?? 'Unknown',
+                'total_xp' => $p->total_xp,
+                'level' => $p->current_level,
+                'streak' => $p->current_streak,
+            ]);
+
+        $recentSubmissions = Submission::with(['assignment', 'student'])
+            ->latest('submitted_at')
+            ->limit(5)
+            ->get()
+            ->map(fn($s) => [
+                'student' => $s->student?->name ?? 'Unknown',
+                'assignment' => $s->assignment?->title ?? 'Unknown',
+                'status' => $s->status,
+                'submitted_at' => $s->submitted_at,
+            ]);
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'total_students' => $totalStudents,
+                'total_teachers' => $totalTeachers,
+                'total_classes' => $totalClasses,
+                'total_subjects' => $totalSubjects,
+                'total_assignments' => $totalAssignments,
+                'total_materials' => $totalMaterials,
+                'total_submissions' => $totalSubmissions,
+                'total_xp_all_students' => $totalXp,
+                'avg_level' => round($avgLevel, 1),
+                'avg_streak' => round($avgStreak, 1),
+                'top_students' => $topStudents,
+                'recent_submissions' => $recentSubmissions,
             ],
         ]);
     }
