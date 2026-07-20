@@ -68,12 +68,12 @@ export default function TeacherDashboard() {
                 </span>
               </div>
               <div className="flex flex-wrap gap-2">
-                {t.subjects.map((s) => (
+                {t.subjects.map((s: any) => (
                   <span
-                    key={s.subject_id}
+                    key={s.subject_id ?? s.id}
                     className="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full"
                   >
-                    {s.subject_name}
+                    {s.subject_name ?? s.name}
                     {s.semester && <span className="ml-1 text-[10px] opacity-60">({s.semester})</span>}
                   </span>
                 ))}

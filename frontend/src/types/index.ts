@@ -82,6 +82,8 @@ export interface Notification {
 }
 
 export interface TeachingSubject {
+  id?: number;
+  name?: string;
   subject_id: number;
   subject_name: string;
   subject_code: string;
