@@ -1,0 +1,18 @@
+﻿
+> eduquest-frontend@1.0.0 dev
+> next dev
+
+npm :  ΓÜá Port 3000 is in use by process 10648, using available port 3001 instead.
+At line:1 char:40
++ cd D:\laragon\www\gamifikasi\frontend; npm run dev 2>&1 | Out-File -F ...
++                                        ~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ( ΓÜá Port 3000 ...t 3001 instead.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+   Γû▓ Next.js 15.5.20
+   - Local:        http://localhost:3001
+   - Network:      http://192.168.56.1:3001
+
+ Γ£ô Starting...
+ Γ£ô Ready in 22.7s
+[?25h

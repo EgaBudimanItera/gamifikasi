@@ -1,0 +1,13 @@
+{
+    "xp": {
+        "assignment_completed": 50,
+        "early_submission": 20,
+        "daily_login": 10,
+        "streak_7_days": 100,
+        "streak_30_days": 500
+    },
+    "level": {
+        "formula": "floor(sqrt(total_xp \/ 100)) + 1",
+        "base_xp": 100
+    }
+}

@@ -1,0 +1,41 @@
+ID,Functional Requirement,User Story,Acceptance Criteria,BDD Scenario,Module,Priority,Status
+FR-01,Login,US-01,AC-01,BDD-01,Authentication,High,Done
+FR-02,Logout,US-02,AC-02,BDD-02,Authentication,High,Done
+FR-03,Reset Password,US-03,AC-03,BDD-03,Authentication,Medium,Done
+FR-04,Manajemen Peran,US-04,AC-04,BDD-04,Authentication,High,Done
+FR-05,Pembatasan Akses,US-05,AC-05,BDD-05,Authentication,High,Done
+FR-06,Kelola Siswa,US-06,AC-06,BDD-06,Master Data,High,Done
+FR-07,Kelola Guru,US-07,AC-07,BDD-07,Master Data,High,Done
+FR-08,Kelola Kelas,US-08,AC-08,BDD-08,Master Data,High,Done
+FR-09,Kelola Mata Pelajaran,US-09,AC-09,BDD-09,Master Data,High,Done
+FR-10,Kelola Tahun Ajaran,US-10,AC-10,BDD-10,Master Data,Medium,Done
+FR-11,Buat Materi,US-11,AC-11,BDD-11,Learning,High,Done
+FR-12,Edit Materi,US-12,AC-12,BDD-12,Learning,Medium,Done
+FR-13,Publikasi Materi,US-13,AC-13,BDD-13,Learning,High,Done
+FR-14,Buat Tugas,US-14,AC-14,BDD-14,Learning,High,Done
+FR-15,Edit Tugas,US-15,AC-15,BDD-15,Learning,Medium,Done
+FR-16,Atur Deadline,US-16,AC-16,BDD-16,Learning,High,Done
+FR-17,Upload Jawaban,US-17,AC-17,BDD-17,Learning,High,Done
+FR-18,Penilaian Tugas,US-18,AC-18,BDD-18,Learning,High,Done
+FR-19,Feedback Tugas,US-19,AC-19,BDD-19,Learning,Medium,Done
+FR-20,Revisi Tugas,US-20,AC-20,BDD-20,Learning,Medium,Done
+FR-21,Pemberian XP,US-21,AC-21,BDD-21,Gamification,High,Done
+FR-22,Pengurangan XP,US-22,AC-22,BDD-22,Gamification,Low,Done
+FR-23,Perhitungan Level,US-23,AC-23,BDD-23,Gamification,High,Done
+FR-24,Pemberian Badge,US-24,AC-24,BDD-24,Gamification,High,Done
+FR-25,Pemberian Streak,US-25,AC-25,BDD-25,Gamification,High,Done
+FR-26,Reset Streak,US-26,AC-26,BDD-26,Gamification,Medium,Done
+FR-27,Pembuatan Quest,US-27,AC-27,BDD-27,Gamification,High,Done
+FR-28,Penyelesaian Quest,US-28,AC-28,BDD-28,Gamification,High,Done
+FR-29,Leaderboard Kelas,US-29,AC-29,BDD-29,Gamification,High,Done
+FR-30,Leaderboard Sekolah,US-30,AC-30,BDD-30,Gamification,Medium,Done
+FR-31,Notifikasi Reward,US-31,AC-31,BDD-31,Engagement,High,Done
+FR-32,Progress Bar,US-32,AC-32,BDD-32,Engagement,Medium,Done
+FR-33,Daily Challenge,US-33,AC-33,BDD-33,Engagement,Medium,Done
+FR-34,Weekly Challenge,US-34,AC-34,BDD-34,Engagement,Medium,Done
+FR-35,Dashboard Guru,US-35,AC-35,BDD-35,Analytics,High,Done
+FR-36,Dashboard Siswa,US-36,AC-36,BDD-36,Analytics,High,Done
+FR-37,Statistik Penyelesaian,US-37,AC-37,BDD-37,Analytics,Medium,Done
+FR-38,Statistik Engagement,US-38,AC-38,BDD-38,Analytics,Medium,Done
+FR-39,Audit Aktivitas,US-39,AC-39,BDD-39,Analytics,High,Done
+FR-40,Ekspor Laporan,US-40,AC-40,BDD-40,Analytics,Low,Done
