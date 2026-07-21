@@ -4,7 +4,7 @@ import ClientLayout from '@/components/layout/ClientLayout';
 
 export const metadata: Metadata = {
   title: 'EduQuest - Gamified Learning Platform',
-  description: 'Platform pembelajaran berbasis gamifikasi untuk siswa SMA/SMK',
+  description: 'Platform pembelajaran berbasis gamifikasi untuk siswa SMP',
 };
 
 export default function RootLayout({

@@ -58,6 +58,14 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('submissions/{submission}/revise', [\App\Http\Controllers\Api\SubmissionController::class, 'revise']);
         Route::get('dashboard/student', [\App\Http\Controllers\Api\DashboardController::class, 'student']);
         Route::get('my-classes', [\App\Http\Controllers\Api\StudentClassController::class, 'myClasses']);
+
+        // Material Reading
+        Route::post('materials/{material}/reading/start', [\App\Http\Controllers\Api\MaterialReadingController::class, 'start']);
+        Route::post('materials/{material}/reading/heartbeat', [\App\Http\Controllers\Api\MaterialReadingController::class, 'heartbeat']);
+        Route::post('materials/{material}/reading/complete', [\App\Http\Controllers\Api\MaterialReadingController::class, 'complete']);
+        Route::get('materials/{material}/reading/quiz', [\App\Http\Controllers\Api\MaterialReadingController::class, 'quiz']);
+        Route::post('materials/{material}/reading/quiz/submit', [\App\Http\Controllers\Api\MaterialReadingController::class, 'submitQuiz']);
+        Route::get('reading/stats', [\App\Http\Controllers\Api\MaterialReadingController::class, 'stats']);
     });
 
     // Gamification - All Authenticated Users
@@ -105,4 +113,30 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('guild/available', [\App\Http\Controllers\Api\GuildController::class, 'available']);
     Route::get('guild/leaderboard', [\App\Http\Controllers\Api\GuildController::class, 'leaderboard']);
     Route::get('guild/{guildId}/members', [\App\Http\Controllers\Api\GuildController::class, 'members']);
+
+    // NPC System
+    Route::get('npcs', [\App\Http\Controllers\Api\NpcController::class, 'index']);
+    Route::get('npcs/{npc}', [\App\Http\Controllers\Api\NpcController::class, 'show']);
+    Route::get('my-npc-affinities', [\App\Http\Controllers\Api\NpcController::class, 'myAffinities']);
+
+    // NPC - Siswa Routes
+    Route::middleware('role:siswa,admin')->group(function () {
+        Route::post('materials/{material}/npc/encounter', [\App\Http\Controllers\Api\NpcController::class, 'encounter']);
+        Route::get('npcs/{npc}/quest', [\App\Http\Controllers\Api\NpcController::class, 'quest']);
+        Route::post('npcs/{npc}/quest/complete', [\App\Http\Controllers\Api\NpcController::class, 'completeQuest']);
+    });
+
+    // Quick Quiz (League Quiz)
+    Route::get('quick-quiz/sessions', [\App\Http\Controllers\Api\LeagueQuizController::class, 'index']);
+    Route::get('quick-quiz/sessions/{session}', [\App\Http\Controllers\Api\LeagueQuizController::class, 'show']);
+    Route::get('quick-quiz/sessions/{session}/results', [\App\Http\Controllers\Api\LeagueQuizController::class, 'results']);
+
+    Route::middleware('role:guru,admin')->group(function () {
+        Route::post('quick-quiz/sessions', [\App\Http\Controllers\Api\LeagueQuizController::class, 'store']);
+    });
+
+    Route::middleware('role:siswa')->group(function () {
+        Route::post('quick-quiz/sessions/{session}/join', [\App\Http\Controllers\Api\LeagueQuizController::class, 'join']);
+        Route::post('quick-quiz/sessions/{session}/submit', [\App\Http\Controllers\Api\LeagueQuizController::class, 'submit']);
+    });
 });

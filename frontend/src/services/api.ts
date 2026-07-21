@@ -155,4 +155,48 @@ export const guildApi = {
   members: (guildId: number) => api.get(`/guild/${guildId}/members`),
 };
 
+export const readingApi = {
+  start: (materialId: number) => api.post(`/materials/${materialId}/reading/start`),
+  heartbeat: (materialId: number, data: { scroll_depth: number; time_spent: number }) =>
+    api.post(`/materials/${materialId}/reading/heartbeat`, data),
+  complete: (materialId: number, data: { scroll_depth: number; duration_seconds: number }) =>
+    api.post(`/materials/${materialId}/reading/complete`, data),
+  quiz: (materialId: number) => api.get(`/materials/${materialId}/reading/quiz`),
+  submitQuiz: (materialId: number, answers: Record<number, string>) =>
+    api.post(`/materials/${materialId}/reading/quiz/submit`, { answers }),
+  stats: () => api.get('/reading/stats'),
+};
+
+export const npcApi = {
+  list: () => api.get('/npcs'),
+  get: (id: number) => api.get(`/npcs/${id}`),
+  encounter: (materialId: number) => api.post(`/materials/${materialId}/npc/encounter`),
+  quest: (npcId: number) => api.get(`/npcs/${npcId}/quest`),
+  completeQuest: (npcId: number, data: { quest_id: number; answer: string }) =>
+    api.post(`/npcs/${npcId}/quest/complete`, data),
+  myAffinities: () => api.get('/my-npc-affinities'),
+};
+
+export const quickQuizApi = {
+  sessions: () => api.get('/quick-quiz/sessions'),
+  get: (sessionId: number) => api.get(`/quick-quiz/sessions/${sessionId}`),
+  join: (sessionId: number) => api.post(`/quick-quiz/sessions/${sessionId}/join`),
+  submit: (sessionId: number, answers: Record<number, string>) =>
+    api.post(`/quick-quiz/sessions/${sessionId}/submit`, { answers }),
+  results: (sessionId: number) => api.get(`/quick-quiz/sessions/${sessionId}/results`),
+  create: (data: {
+    title: string;
+    mode: 'class' | 'guild';
+    class_id?: number;
+    guild_id?: number;
+    duration_minutes?: number;
+    questions_count?: number;
+    difficulty?: string;
+    pass_threshold?: number;
+    xp_reward?: number;
+    starts_at?: string;
+    ends_at?: string;
+  }) => api.post('/quick-quiz/sessions', data),
+};
+
 export default api;

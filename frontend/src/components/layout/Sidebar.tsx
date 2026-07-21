@@ -23,6 +23,8 @@ const navItems: NavItem[] = [
   { label: 'Badge', href: '/badges', icon: '🏆', roles: ['siswa', 'admin'] },
   { label: 'Leaderboard', href: '/leaderboard', icon: '🏅', roles: ['siswa', 'guru', 'admin'] },
   { label: 'Riwayat XP', href: '/xp-history', icon: '⭐', roles: ['siswa'] },
+  { label: 'NPC Mentors', href: '/npcs', icon: '🧙', roles: ['siswa'] },
+  { label: 'Statistik Baca', href: '/reading-stats', icon: '📖', roles: ['siswa'] },
   { label: 'Liga', href: '/league', icon: '🏆', roles: ['siswa'] },
   { label: 'Guild', href: '/guild', icon: '🛡️', roles: ['siswa'] },
   { label: 'Manajemen User', href: '/admin/users', icon: '👥', roles: ['admin'] },

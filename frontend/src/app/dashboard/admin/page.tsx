@@ -70,7 +70,7 @@ export default function AdminDashboardPage() {
           <p className="text-sm text-gray-500 mt-1">Overview platform EduQuest</p>
         </div>
         <div className="text-right text-xs text-gray-400">
-          SMK Nusantara
+          SMP Nusantara
         </div>
       </div>
 

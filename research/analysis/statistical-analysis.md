@@ -8,7 +8,7 @@
 
 | Parameter | Keterangan |
 |-----------|------------|
-| Jumlah Responden | 30-50 siswa SMA/SMK |
+| Jumlah Responden | 30-40 siswa SMP kelas VII |
 | Kelompok Eksperimen | Kelas dengan gamifikasi |
 | Kelompok Kontrol | Kelas tanpa gamifikasi |
 | Durasi Pengamatan | 4-8 minggu |

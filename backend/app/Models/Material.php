@@ -35,4 +35,19 @@ class Material extends Model
     {
         return $this->belongsTo(ClassModel::class, 'class_id');
     }
+
+    public function readingLogs(): HasMany
+    {
+        return $this->hasMany(ReadingLog::class);
+    }
+
+    public function readingQuizzes(): HasMany
+    {
+        return $this->hasMany(ReadingQuiz::class);
+    }
+
+    public function readingQuizAttempts(): HasMany
+    {
+        return $this->hasMany(ReadingQuizAttempt::class);
+    }
 }

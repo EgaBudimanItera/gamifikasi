@@ -39,3 +39,26 @@ FR-37,Statistik Penyelesaian,US-37,AC-37,BDD-37,Analytics,Medium,Done
 FR-38,Statistik Engagement,US-38,AC-38,BDD-38,Analytics,Medium,Done
 FR-39,Audit Aktivitas,US-39,AC-39,BDD-39,Analytics,High,Done
 FR-40,Ekspor Laporan,US-40,AC-40,BDD-40,Analytics,Low,Done
+FR-41,Quick Match Battle,US-41,AC-41,BDD-41,Battle Quiz PvP,High,Planned
+FR-42,Invite Friend Battle,US-42,AC-42,BDD-42,Battle Quiz PvP,Medium,Planned
+FR-43,Battle Gameplay,US-43,AC-43,BDD-43,Battle Quiz PvP,High,Planned
+FR-44,Battle Result & Reward,US-44,AC-44,BDD-44,Battle Quiz PvP,High,Planned
+FR-45,Battle History,US-45,AC-45,BDD-45,Battle Quiz PvP,Medium,Planned
+FR-46,Battle Leaderboard,US-46,AC-46,BDD-46,Battle Quiz PvP,Medium,Planned
+FR-47,Battle Badge,US-47,AC-47,BDD-47,Battle Quiz PvP,Medium,Planned
+FR-48,Teacher Battle Statistics,US-48,AC-48,BDD-48,Battle Quiz PvP,Medium,Planned
+FR-49,Question Bank Management,US-49,AC-49,BDD-49,Battle Quiz PvP,High,Planned
+FR-50,Battle Timer & Anti-Cheat,US-50,AC-50,BDD-50,Battle Quiz PvP,High,Planned
+FR-63,Quick Quiz Session Management,US-63,AC-63,BDD-63,Quick Quiz Liga,High,Implemented
+FR-64,Quick Quiz Participation & Timer,US-64,AC-64,BDD-64,Quick Quiz Liga,High,Implemented
+FR-65,Quick Quiz Scoring & Ranking,US-65,AC-65,BDD-65,Quick Quiz Liga,High,Implemented
+FR-66,Quick Quiz Anti-Cheat,US-66,AC-66,BDD-66,Quick Quiz Liga,High,Implemented
+FR-54,Pet Adoption & Evolution,US-54,AC-54,BDD-54,Pet System,High,Planned
+FR-55,Pet Interaction & Mood,US-55,AC-55,BDD-55,Pet System,Medium,Planned
+FR-56,Pet Accessories & Skills,US-56,AC-56,BDD-56,Pet System,Medium,Planned
+FR-57,Quest NPC Contextual,US-57,AC-57,BDD-57,Quest NPC,High,Implemented
+FR-58,Quest NPC Dialogue & Reward,US-58,AC-58,BDD-58,Quest NPC,Medium,Implemented
+FR-59,Material Reading Points,US-59,AC-59,BDD-59,Material Reading,High,Implemented
+FR-60,Reading Time Tracking,US-60,AC-60,BDD-60,Material Reading,High,Implemented
+FR-61,Material Reading Quiz,US-61,AC-61,BDD-61,Material Reading,Medium,Implemented
+FR-62,Reading Anti-Cheat,US-62,AC-62,BDD-62,Material Reading,High,Implemented

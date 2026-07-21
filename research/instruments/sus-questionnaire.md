@@ -53,4 +53,4 @@ Harap menilai setiap pernyataan berikut berdasarkan pengalaman Anda menggunakan 
 ### Target Penelitian
 - SUS Score ≥ 70 (Good)
 - Evaluasi dilakukan pada 30-50 responden
-- Responden terdiri dari siswa SMA/SMK
+- Responden terdiri dari siswa SMP kelas VII

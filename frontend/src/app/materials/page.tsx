@@ -1,11 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { materialApi } from '@/services/api';
 import { useAuth } from '@/contexts/AuthContext';
 
 export default function MaterialsPage() {
   const { user } = useAuth();
+  const router = useRouter();
   const [materials, setMaterials] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState<number | null>(null);
@@ -115,6 +117,14 @@ export default function MaterialsPage() {
               {expanded === m.id && (
                 <div className="px-5 pb-5 border-t pt-4">
                   <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{m.content}</p>
+                  {user?.role === 'siswa' && (
+                    <button
+                      onClick={() => router.push(`/materials/${m.id}`)}
+                      className="mt-4 px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 transition"
+                    >
+                      Baca Materi & Dapatkan XP
+                    </button>
+                  )}
                 </div>
               )}
             </div>

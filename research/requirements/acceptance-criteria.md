@@ -305,3 +305,261 @@
   1. Given guru/admin berada di halaman laporan
   2. When guru/admin mengklik export
   3. Then file CSV/PDF terdownload dengan data yang sesuai
+
+## Battle Quiz PvP (AC-41 to AC-50)
+
+### AC-41 Quick Match Battle
+- **FR Ref:** FR-41
+- **Scenarios:**
+  1. Given siswa berada di halaman Battle Quiz
+  2. When siswa mengklik "Quick Match"
+  3. Then sistem mencari lawan dengan level yang seimbang (+/- 1 level)
+  4. And lawan harus berasal dari mata pelajaran yang sama
+  5. When lawan ditemukan, then battle dimulai dalam 3 detik countdown
+
+### AC-42 Invite Friend Battle
+- **FR Ref:** FR-42
+- **Scenarios:**
+  1. Given siswa berada di halaman Battle Quiz
+  2. When siswa memilih teman dan mengklik "Invite to Battle"
+  3. Then undangan battle dikirim ke teman
+  4. When teman menerima undangan, then battle dimulai
+  5. When teman menolak atau tidak merespon dalam 30 detik, then undangan dibatalkan
+
+### AC-43 Battle Gameplay
+- **FR Ref:** FR-43
+- **Scenarios:**
+  1. Given battle antara dua siswa sedang berlangsung
+  2. When soal muncul untuk siswa pertama
+  3. Then timer 30 detik dimulai
+  4. When siswa menjawab benar, then +10 poin
+  5. When siswa menjawab salah atau waktu habis, then +0 poin
+  6. When soal selesai untuk siswa pertama, then giliran berpindah ke siswa kedua
+  7. When semua soal selesai, then battle berakhir
+
+### AC-44 Battle Result & Reward
+- **FR Ref:** FR-44
+- **Scenarios:**
+  1. Given battle telah selesai
+  2. When sistem menghitung skor akhir
+  3. Then pemenang ditentukan berdasarkan total poin tertinggi
+  4. And pemenang mendapatkan +30 XP
+  5. And peserta yang kalah mendapatkan +15 XP (partisipasi)
+  6. And jika semua jawaban benar (perfect), bonus +10 XP diberikan
+  7. And hasil battle disimpan di riwayat
+
+### AC-45 Battle History
+- **FR Ref:** FR-45
+- **Scenarios:**
+  1. Given siswa membuka halaman Battle History
+  2. Then siswa melihat daftar battle yang pernah diikuti
+  3. And setiap entry menampilkan: lawan, skor, hasil (menang/kalah/seri), tanggal
+  4. And riwayat diurutkan dari yang terbaru
+
+### AC-46 Battle Leaderboard
+- **FR Ref:** FR-46
+- **Scenarios:**
+  1. Given siswa membuka Battle Leaderboard
+  2. When siswa memilih scope (kelas/sekolah)
+  3. Then siswa melihat peringkat berdasarkan jumlah kemenangan
+  4. And win rate (persentase kemenangan) ditampilkan
+  5. And peringkat diurutkan dari kemenangan terbanyak
+
+### AC-47 Battle Badge
+- **FR Ref:** FR-47
+- **Scenarios:**
+  1. Given siswa mencapai kriteria badge battle
+  2. When badge "Battle Champion" diberikan setelah 10 kemenangan
+  3. Then badge muncul di profil dan notifikasi dikirim
+  4. When badge "Unstoppable" diberikan setelah 5 kemenangan berturut-turut
+  5. Then badge muncul di profil dan notifikasi dikirim
+
+### AC-48 Teacher Battle Statistics
+- **FR Ref:** FR-48
+- **Scenarios:**
+  1. Given guru membuka halaman Battle Statistics
+  2. When guru memilih kelas dan mata pelajaran
+  3. Then guru melihat: jumlah battle per siswa, rata-rata skor, tingkat partisipasi
+  4. And guru dapat melihat distribusi menang/kalah per siswa
+
+### AC-49 Question Bank Management
+- **FR Ref:** FR-49
+- **Scenarios:**
+  1. Given guru membuka halaman Question Bank
+  2. When guru membuat soal baru dengan 4 pilihan ganda
+  3. Then soal tersimpan dengan jawaban benar yang ditandai
+  4. And soal memiliki tingkat kesulitan (easy/medium/hard)
+  5. When battle dimulai, then sistem mengambil soal acak dari bank soal
+
+### AC-50 Battle Timer & Anti-Cheat
+- **FR Ref:** FR-50
+- **Scenarios:**
+  1. Given battle sedang berlangsung
+  2. When timer server-side mencapai 0 detik
+  3. Then jawaban otomatis dianggap salah
+  4. When request jawaban dikirim ke server
+  5. Then server memvalidasi timestamp jawaban
+   6. When timestamp jawaban lebih cepat dari 3 detik (kemungkinan bot)
+   7. Then server mencatat anomaly untuk review
+
+## Quick Quiz Liga (AC-63 to AC-66)
+
+### AC-63 Quick Quiz Session Management
+- **FR Ref:** FR-63
+- **Scenarios:**
+  1. Given guru berada di halaman Quick Quiz
+  2. When guru mengklik "Buat Quiz" dan mengisi judul, mode (kelas/guild), kelas/guild target
+  3. Then sesi quiz terbuat dengan status aktif
+  4. And soal diambil otomatis dari bank soal NPC Quest berdasarkan difficulty mode
+  5. And siswa yang terdaftar di kelas/guild dapat melihat sesi quiz
+
+### AC-64 Quick Quiz Participation & Timer
+- **FR Ref:** FR-64
+- **Scenarios:**
+  1. Given siswa melihat sesi quiz aktif
+  2. When siswa mengklik "Ikut Quiz"
+  3. Then siswa mendapat daftar soal tanpa jawaban benar
+  4. And timer countdown dimulai dari durasi sesi
+  5. When waktu habis, then jawaban otomatis dikirim
+  6. When siswa sudah submit, then tidak bisa join lagi ke sesi yang sama
+
+### AC-65 Quick Quiz Scoring & Ranking
+- **FR Ref:** FR-65
+- **Scenarios:**
+  1. Given siswa telah submit jawaban
+  2. When sistem menghitung skor
+  3. Then jumlah jawaban benar ditampilkan
+  4. And pass percentage dihitung
+  5. When pass percentage >= 60%, then XP reward ditambahkan
+  6. And ranking peserta ditampilkan berdasarkan jumlah benar
+
+### AC-66 Quick Quiz Anti-Cheat
+- **FR Ref:** FR-66
+- **Scenarios:**
+  1. Given siswa sudah submit jawaban di sesi tertentu
+  2. When siswa mencoba join sesi yang sama lagi
+  3. Then sistem menolak dengan pesan "Kamu sudah bergabung"
+  4. When siswa mencoba submit jawaban lagi
+  5. Then sistem menolak dengan pesan "Kamu sudah submit jawaban"
+  6. When pertanyaan dikirim ke client, then field correct_answer tidak disertakan
+
+## Pet System (AC-54 to AC-56)
+
+### AC-54 Pet Adoption & Evolution
+- **FR Ref:** FR-54
+- **Scenarios:**
+  1. Given siswa baru mendaftar
+  2. When siswa menyelesaikan tutorial
+  3. Then siswa mendapatkan telur pet
+  4. When total_xp siswa mencapai 100 (level 3)
+  5. Then telur menetas menjadi baby pet
+  6. When total_xp mencapai 500 (level 5)
+  7. Then pet berevolusi menjadi teen pet
+  8. And teen pet membuka fitur aksesori
+
+### AC-55 Pet Interaction & Mood
+- **FR Ref:** FR-55
+- **Scenarios:**
+  1. Given siswa membuka halaman Pet
+  2. When siswa mengklik "Feed" pada pet
+  3. Then hunger pet meningkat +1
+  4. And happiness pet meningkat +1
+  5. When siswa login harian
+  6. Then happiness pet meningkat +1
+  7. When siswa tidak aktif 1 hari
+  8. Then happiness pet berkurang -2
+
+### AC-56 Pet Accessories & Skills
+- **FR Ref:** FR-56
+- **Scenarios:**
+  1. Given siswa memiliki teen pet
+  2. And siswa memiliki aksesori "Topi Cerdas" dari crafting
+  3. When siswa mengequip "Topi Cerdas" ke pet
+  4. Then pet menampilkan topi di dashboard
+  5. And pet mendapat skill "Study Buddy" (+5% XP dari reading)
+  6. When siswa membaca materi dengan pet equipped
+  7. Then XP reading bertambah 5%
+
+## Quest NPC (AC-57 to AC-58) ✅ Implemented
+
+### AC-57 Quest NPC Contextual ✅ Implemented
+- **FR Ref:** FR-57
+- **Status:** ✅ Implemented
+- **Implementation:** `NpcService::encounter()` — 33% dice roll, `getQuestsByLevel()` filters by affinity level. NpcSeeder: 3 NPCs, NpcQuestSeeder: 30 quests
+- **Scenarios:**
+  1. Given siswa membuka materi "HTML Fundamentals"
+  2. When halaman materi dimuat (33% chance)
+  3. Then NPC "Pak HTML" muncul dengan quest contextual
+  4. And quest: "Buat halaman HTML sederhana" (difficulty: easy, reward: 20 XP)
+  5. When siswa menerima quest
+  6. Then quest masuk ke daftar quest aktif
+  7. And NPC memberikan hint untuk menyelesaikan quest
+
+### AC-58 Quest NPC Dialogue & Reward ✅ Implemented
+- **FR Ref:** FR-58
+- **Status:** ✅ Implemented
+- **Implementation:** `UserNpcAffinity::calculateLevel()` — XP thresholds [5,15,30,50], `Npc::getDialogForLevel()` — 5 dialog levels per NPC
+- **Scenarios:**
+  1. Given siswa pertama kali bertemu NPC "Pak HTML"
+  2. When dialog intro ditampilkan
+  3. Then NPC berkenalan dengan dialog level 1
+  4. When siswa menyelesaikan quest
+  5. Then NPC memberikan dialog celebration
+  6. And reward: 20 XP + affinity XP +5
+  7. When affinity XP reaches threshold
+  8. Then NPC affinity level naik dan quest harder terbuka
+
+## Material Reading (AC-59 to AC-62)
+
+### AC-59 Material Reading Points ✅ Implemented
+- **FR Ref:** FR-59
+- **Status:** ✅ Implemented
+- **Implementation:** `MaterialReadingService::calculateXp()` — XP breakdown: open_bonus (+5), first_read_bonus (+20), time_bonus (+10), scroll_completion_bonus (+5)
+- **Scenarios:**
+  1. Given siswa membuka materi "CSS Box Model" untuk pertama kali
+  2. When materi terbuka
+  3. Then siswa mendapat +5 XP (open bonus)
+  4. And siswa mendapat +20 XP (first read bonus)
+  5. When siswa membaca selama 3 menit
+  6. Then siswa mendapat +10 XP (time bonus)
+  7. When siswa scroll ke akhir materi
+  8. Then siswa mendapat +5 XP (completion bonus)
+  9. Total: +40 XP
+
+### AC-60 Reading Time Tracking ✅ Implemented
+- **FR Ref:** FR-60
+- **Status:** ✅ Implemented
+- **Implementation:** `reading_logs` table + `ReadingTracker` frontend component (heartbeat tiap 30 detik)
+- **Scenarios:**
+  1. Given siswa membuka materi
+  2. When timestamp buka materi tercatat
+  3. And sistem mulai menghitung waktu_baca
+  4. When siswa menutup materi
+  5. Then data dikirim ke backend: {material_id, timestamp_buka, waktu_total, scroll_depth, interaksi_count}
+  6. And data tersimpan di tabel reading_logs
+
+### AC-61 Material Reading Quiz ✅ Implemented
+- **FR Ref:** FR-61
+- **Status:** ✅ Implemented
+- **Implementation:** `ReadingQuizSeeder` (60 soal) + `MaterialReadingService::getQuiz()` dan `submitQuiz()` + `ReadingQuiz` frontend component
+- **Scenarios:**
+  1. Given siswa telah membaca materi > 3 menit dan scroll to bottom
+  2. When quiz singkat ditampilkan (3 soal pilihan ganda)
+  3. When siswa menjawab benar 2 dari 3 soal
+  4. Then siswa mendapat +15 XP bonus
+  5. When siswa menjawab benar kurang dari 2 soal
+  6. Then siswa dapat mengulang setelah 10 menit
+
+### AC-62 Reading Anti-Cheat ✅ Implemented
+- **FR Ref:** FR-62
+- **Status:** ✅ Implemented
+- **Implementation:** `MaterialReadingService::detectAnomalies()` — scroll 80%+ < 10 detik = anomaly, max 10 materi/jam
+- **Scenarios:**
+  1. Given siswa membuka materi
+  2. When siswa mencoba langsung scroll ke bawah dalam < 3 detik per paragraf
+  3. Then sistem menolak time bonus
+  4. When siswa mengirim data dengan scroll_depth = 100% tapi waktu < 10 detik
+  5. Then server mencatat anomali
+  6. And anomali masuk ke log untuk review admin
+  7. When siswa membaca > 10 materi dalam 1 jam
+  8. Then sistem menampilkan pesan "Batas reading tercapai, coba lagi nanti"

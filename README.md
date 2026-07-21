@@ -1,6 +1,6 @@
 # EduQuest - Gamified Learning Platform
 
-Platform pembelajaran berbasis web yang menerapkan gamifikasi untuk meningkatkan motivasi, keterlibatan, dan ketepatan penyelesaian tugas siswa SMA/SMK pada Kurikulum Merdeka.
+Platform pembelajaran berbasis web yang menerapkan gamifikasi untuk meningkatkan motivasi, keterlibatan, dan ketepatan penyelesaian tugas siswa SMP kelas VII pada Kurikulum Merdeka.
 
 ## Tech Stack
 

@@ -139,19 +139,77 @@ Client ──POST /api/auth/login──► Laravel Sanctum
 ### 4.4 Gamification Engine
 
 ```
-┌─────────────────────────────────────────────┐
-│          GamificationService                 │
-├─────────────────────────────────────────────┤
-│  ┌─────────┐ ┌─────────┐ ┌─────────────┐   │
-│  │XP Engine│ │Level    │ │Badge Engine │   │
-│  │         │ │Engine   │ │             │   │
-│  └────┬────┘ └────┬────┘ └──────┬──────┘   │
-│       │           │             │           │
-│  ┌────┴────┐ ┌────┴────┐ ┌─────┴──────┐   │
-│  │Streak   │ │Quest    │ │Leaderboard │   │
-│  │Engine   │ │Engine   │ │Engine      │   │
-│  └─────────┘ └─────────┘ └────────────┘   │
-└─────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│                        GamificationEngine                           │
+├─────────────────────────────────────────────────────────────────────┤
+│  ┌──────────┐ ┌──────────┐ ┌───────────┐ ┌──────────┐ ┌────────┐  │
+│  │XP Engine │ │Level     │ │Badge      │ │Streak    │ │Quest   │  │
+│  │          │ │Engine    │ │Engine     │ │Engine    │ │Engine  │  │
+│  └────┬─────┘ └────┬─────┘ └─────┬─────┘ └────┬─────┘ └───┬────┘  │
+│       │            │             │             │           │        │
+│  ┌────┴─────┐ ┌────┴─────┐ ┌────┴──────┐ ┌───┴──────┐ ┌──┴────┐  │
+│  │Leaderboard│ │NPC Mentor│ │Guild      │ │Adaptive  │ │Reading│  │
+│  │Engine    │ │Affinity  │ │Collab     │ │Challenge │ │Engine │  │
+│  │          │ │Engine    │ │Reward     │ │Quiz      │ │       │  │
+│  └──────────┘ └──────────┘ └───────────┘ └──────────┘ └───────┘  │
+│                                                                     │
+│  ┌─────────────────────────────────────────────────────────────┐   │
+│  │              Analytics & Logs Engine                        │   │
+│  │  (Activity Logs, Daily/Weekly Challenges, Export Reports)   │   │
+│  └─────────────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### 4.5 NPC Mentor Affinity Engine
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                        NpcService                               │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  1. Random Encounter (33% chance per material read)             │
+│  2. Create UserNpcAffinity (level=1, xp=0)                     │
+│  3. Quest Gating: required_affinity_level <= affinity_level     │
+│  4. Quest Completion:                                           │
+│     - Award XP via XpService                                    │
+│     - Calculate MAS:                                            │
+│       MAS_baru = MAS_lama                                       │
+│         + (Quest × 0.50)          // penyelesaian quest         │
+│         + (Konsistensi × 0.20)    // login harian               │
+│         + (Ketepatan × 0.15)      // sebelum deadline           │
+│         + (Performa × 0.15)       // skor quiz                  │
+│     - Recalculate affinity_level                                │
+│  5. Level Thresholds: [0, 5, 15, 30, 50] → Level 1-5          │
+│                                                                 │
+│  Adaptivity: Higher MAS → harder quests → more XP               │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 4.6 Guild Collaborative Reward Engine
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                        GuildService                              │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  1. Create/Join Guild (max 5 members, class-scoped)             │
+│  2. XP Contribution (dual-write):                               │
+│     - guild.total_guild_xp += amount                            │
+│     - member.contributed_xp += amount                           │
+│  3. Guild Target:                                               │
+│     - Target mingguan: 50 quest selesai                         │
+│     - Jika tercapai:                                            │
+│       • +150 XP untuk seluruh anggota                           │
+│       • Guild Chest (randomized reward)                         │
+│       • Bonus 10% XP selama 24 jam                              │
+│  4. Guild Leaderboard: sort by total_guild_xp DESC              │
+│  5. Leader Transfer: oldest member when leader leaves            │
+│  6. Guild Quest: collaborative progress tracking                 │
+│  7. Adaptive Challenge Quiz Guild Mode:                          │
+│     15min, 10 hard questions, 75 XP                              │
+│                                                                 │
+│  Manfaat: Kolaborasi, gotong royong, kompetisi sehat inter-guild│
+└─────────────────────────────────────────────────────────────────┘
 ```
 
 ## 5. Database Design Summary
@@ -192,7 +250,34 @@ Client ──POST /api/auth/login──► Laravel Sanctum
 | leaderboard_cache  | Cache leaderboard                          |
 | notifications      | Reward notifications                       |
 
-### 5.4 Analytics Tables
+### 5.4 NPC Mentor Tables
+
+| Table                 | Purpose                                    |
+|-----------------------|--------------------------------------------|
+| npcs                  | NPC mentor definitions                     |
+| npc_quests            | Quest definitions per NPC (with required_affinity_level) |
+| user_npc_affinity     | Mentor Affinity Score (MAS) per user-NPC pair |
+| reading_materials     | Materi bacaan dengan tracking              |
+| reading_progress      | Progress baca siswa per materi             |
+| reading_quizzes       | Quiz singkat setelah baca materi           |
+
+### 5.5 Guild Tables
+
+| Table              | Purpose                                    |
+|--------------------|--------------------------------------------|
+| guilds             | Guild definitions (name, leader, XP)       |
+| guild_members      | Keanggotaan guild (role, contributed_xp)   |
+| guild_quests       | Quest bersama guild                        |
+
+### 5.6 Quick Quiz Liga Tables
+
+| Table                    | Purpose                                    |
+|--------------------------|--------------------------------------------|
+| league_quiz_sessions     | Sesi quiz (class/guild mode)               |
+| league_quiz_questions    | Soal per sesi                              |
+| league_quiz_participants | Peserta dan hasil quiz                     |
+
+### 5.7 Analytics Tables
 
 | Table              | Purpose                                    |
 |--------------------|--------------------------------------------|

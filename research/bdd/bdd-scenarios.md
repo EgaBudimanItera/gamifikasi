@@ -489,7 +489,7 @@ Feature: School Leaderboard
   So that termotivasi
 
   Scenario: Melihat leaderboard sekolah
-    Given siswa "Budi" berada di sekolah "SMK Nusantara"
+    Given siswa "Budi" berada di sekolah "SMP Nusantara"
     When siswa membuka leaderboard sekolah
     Then siswa melihat peringkat berdasarkan total_xp seluruh sekolah
 ```
@@ -651,3 +651,532 @@ Feature: Export Report
     Then file PDF terdownload
     Dan file berisi data yang sesuai
 ```
+
+## Battle Quiz PvP
+
+### BDD-41 Quick Match Battle
+```gherkin
+Feature: Quick Match Battle
+  As a siswa
+  I want to memulai battle quiz cepat dengan lawan otomatis
+  So that saya dapat berkompetisi dengan siswa lain
+
+  Scenario: Quick match berhasil menemukan lawan
+    Given siswa "Budi" berada di halaman Battle Quiz
+    And siswa "Budi" memiliki level 3
+    When siswa "Budi" mengklik "Quick Match"
+    Then sistem mencari lawan dengan level 2-4
+    And lawan ditemukan: "Andi" level 3
+    And countdown 3 detik dimulai
+    And battle dimulai
+
+  Scenario: Quick match tidak menemukan lawan
+    Given siswa "Budi" berada di halaman Battle Quiz
+    When siswa "Budi" mengklik "Quick Match"
+    And tidak ada lawan yang tersedia dalam 30 detik
+    Then sistem menampilkan pesan "Tidak ada lawan yang tersedia"
+    And siswa kembali ke halaman Battle Quiz
+```
+
+### BDD-42 Invite Friend Battle
+```gherkin
+Feature: Invite Friend Battle
+  As a siswa
+  I want to mengundang teman untuk battle quiz
+  So that saya dapat berkompetisi dengan teman
+
+  Scenario: Mengundang teman untuk battle
+    Given siswa "Budi" berada di halaman Battle Quiz
+    When siswa "Budi" memilih teman "Andi" dan mengklik "Invite to Battle"
+    Then undangan battle dikirim ke "Andi"
+    And "Andi" melihat notifikasi undangan battle
+
+  Scenario: Teman menerima undangan
+    Given "Andi" menerima undangan battle dari "Budi"
+    When "Andi" mengklik "Accept"
+    Then battle antara "Budi" dan "Andi" dimulai
+
+  Scenario: Teman menolak undangan
+    Given "Andi" menerima undangan battle dari "Budi"
+    When "Andi" mengklik "Decline"
+    Then undangan dibatalkan
+    And "Budi" mendapat notifikasi undangan ditolak
+```
+
+### BDD-43 Battle Gameplay
+```gherkin
+Feature: Battle Gameplay
+  As a siswa
+  I want to menjawab soal battle secara bergantian
+  So that battle terasa seru
+
+  Scenario: Siswa menjawab soal dengan benar
+    Given battle antara "Budi" dan "Andi" sedang berlangsung
+    And soal pertama: "Apa kepanjangan HTML?"
+    When "Budi" menjawab "HyperText Markup Language" dalam 15 detik
+    Then "Budi" mendapat +10 poin
+    And giliran berpindah ke "Andi"
+
+  Scenario: Siswa menjawab soal dengan salah
+    Given battle antara "Budi" dan "Andi" sedang berlangsung
+    When "Budi" menjawab dengan jawaban yang salah
+    Then "Budi" mendapat +0 poin
+    And giliran berpindah ke "Andi"
+
+  Scenario: Waktu habis
+    Given battle antara "Budi" dan "Andi" sedang berlangsung
+    When timer mencapai 0 detik
+    Then jawaban otomatis dianggap salah
+    And +0 poin diberikan
+```
+
+### BDD-44 Battle Result & Reward
+```gherkin
+Feature: Battle Result & Reward
+  As a siswa
+  I want to melihat hasil battle dan mendapatkan reward
+  So that saya tahu hasilnya
+
+  Scenario: Battle selesai - pemenang ditentukan
+    Given battle antara "Budi" dan "Andi" telah selesai
+    And "Budi" memiliki total poin = 40
+    And "Andi" memiliki total poin = 30
+    When sistem menghitung hasil
+    Then "Budi" dinyatakan sebagai pemenang
+    And "Budi" mendapatkan +30 XP
+    And "Andi" mendapatkan +15 XP (partisipasi)
+    And hasil disimpan di riwayat
+
+  Scenario: Perfect battle
+    Given battle antara "Budi" dan "Andi" telah selesai
+    And "Budi" menjawab semua soal dengan benar
+    When battle berakhir
+    Then "Budi" mendapatkan bonus +10 XP (perfect battle)
+    And badge "Perfect Battle" diberikan jika belum punya
+```
+
+### BDD-45 Battle History
+```gherkin
+Feature: Battle History
+  As a siswa
+  I want to melihat riwayat battle saya
+  So that saya dapat melacak performa
+
+  Scenario: Melihat riwayat battle
+    Given siswa "Budi" telah mengikuti 5 battle
+    When siswa "Budi" membuka halaman Battle History
+    Then siswa melihat 5 entri riwayat battle
+    Dan setiap entri menampilkan: lawan, skor, hasil, tanggal
+    Dan riwayat diurutkan dari yang terbaru
+```
+
+### BDD-46 Battle Leaderboard
+```gherkin
+Feature: Battle Leaderboard
+  As a siswa
+  I want to melihat peringkat battle
+  So that termotivasi menang
+
+  Scenario: Melihat leaderboard battle kelas
+    Given siswa "Budi" berada di kelas "XII RPL 1"
+    When siswa membuka Battle Leaderboard kelas
+    Then siswa melihat peringkat berdasarkan jumlah kemenangan
+    Dan win rate ditampilkan
+    Dan peringkat diurutkan dari kemenangan terbanyak
+```
+
+### BDD-47 Battle Badge
+```gherkin
+Feature: Battle Badge
+  As a siswa
+  I want to mendapatkan badge pencapaian battle
+  So that saya punya penghargaan
+
+  Scenario: Mendapat badge Battle Champion
+    Given siswa "Budi" memiliki 9 kemenangan battle
+    When siswa "Budi" memenangkan battle ke-10
+    Then badge "Battle Champion" diberikan
+    And notifikasi "Selamat! Anda mendapat badge Battle Champion!" dikirim
+
+  Scenario: Mendapat badge Unstoppable
+    Given siswa "Budi" memiliki 4 kemenangan berturut-turut
+    When siswa "Budi" memenangkan battle ke-5 berturut-turut
+    Then badge "Unstoppable" diberikan
+```
+
+### BDD-48 Teacher Battle Statistics
+```gherkin
+Feature: Teacher Battle Statistics
+  As a guru
+  I want to melihat statistik battle siswa
+  So that evaluasi engagement
+
+  Scenario: Guru melihat statistik battle
+    Given guru sedang login
+    When guru membuka halaman Battle Statistics
+    And guru memilih kelas "XII RPL 1"
+    Then guru melihat jumlah battle per siswa
+    Dan rata-rata skor kelas
+    Dan tingkat partisipasi battle
+```
+
+### BDD-49 Question Bank Management
+```gherkin
+Feature: Question Bank Management
+  As a guru
+  I want to mengelola bank soal battle quiz
+  So that soal bervariasi
+
+  Scenario: Guru membuat soal battle quiz
+    Given guru sedang login
+    When guru membuat soal "Apa kepanjangan CSS?" dengan 4 pilihan
+    And jawaban benar "Cascading Style Sheets"
+    And tingkat kesulitan "easy"
+    Then soal tersimpan di bank soal
+    And soal dapat digunakan di battle quiz
+
+  Scenario: Sistem mengambil soal acak
+    Given bank soal memiliki 20 soal
+    When battle dimulai
+    Then sistem mengambil 5 soal secara acak
+    Dan urutan soal berbeda untuk setiap battle
+```
+
+### BDD-50 Battle Timer & Anti-Cheat
+```gherkin
+Feature: Battle Timer & Anti-Cheat
+  As a sistem
+  I want to memvalidasi jawaban dengan timer
+  So that battle adil
+
+  Scenario: Timer server-side habis
+    Given battle sedang berlangsung
+    When timer server-side mencapai 0 detik
+    Then jawaban otomatis dianggap salah
+    And poin = 0
+
+  Scenario: Deteksi anomali jawaban terlalu cepat
+    Given battle sedang berlangsung
+    When siswa mengirim jawaban dalam waktu kurang dari 3 detik
+    Then server mencatat anomali timing
+    And jawaban tetap diproses
+    Dan data anomali disimpan untuk review admin
+```
+
+## Quick Quiz Liga
+
+### BDD-63 Quick Quiz Session Management
+```gherkin
+Feature: Quick Quiz Session Management
+
+  Scenario: Guru membuat sesi quiz kelas
+    Given guru "Putri" berada di halaman Quick Quiz
+    When guru mengklik "Buat Quiz"
+    And guru mengisi judul "Kuis Matematika VII-A", mode "Kelas", kelas "VII-A"
+    And guru mengklik "Buat Quiz"
+    Then sesi quiz terbuat dengan 5 soal
+    And status sesi adalah "active"
+    And durasi sesi adalah 5 menit
+
+  Scenario: Guru membuat sesi quiz guild
+    Given guru "Putri" berada di halaman Quick Quiz
+    When guru membuat sesi quiz mode "Guild" untuk "Penjelajah Ilmu"
+    Then sesi quiz terbuat dengan 10 soal
+    And difficulty sesi adalah "hard"
+    And xp_reward sesi adalah 75
+```
+
+### BDD-64 Quick Quiz Participation & Timer
+```gherkin
+Feature: Quick Quiz Participation & Timer
+
+  Scenario: Siswa bergabung ke sesi quiz
+    Given siswa "Budi" berada di halaman Quick Quiz
+    And terdapat sesi quiz aktif "Kuis Matematika VII-A"
+    When siswa mengklik "Ikut Quiz"
+    Then siswa mendapat 5 soal tanpa jawaban benar
+    And timer countdown dimulai dari 5 menit
+
+  Scenario: Siswa tidak bisa join dua kali
+    Given siswa "Budi" sudah bergabung di sesi quiz
+    When siswa mencoba join lagi
+    Then sistem menolak dengan pesan "Kamu sudah bergabung"
+
+  Scenario: Waktu habis otomatis submit
+    Given siswa "Budi" sedang mengerjakan quiz
+    When timer mencapai 0
+    Then jawaban otomatis dikirim
+    Dan hasil quiz ditampilkan
+```
+
+### BDD-65 Quick Quiz Scoring & Ranking
+```gherkin
+Feature: Quick Quiz Scoring & Ranking
+
+  Scenario: Siswa lulus quiz
+    Given siswa "Budi" menjawab 4 dari 5 soal dengan benar
+    When siswa submit jawaban
+    Then pass percentage adalah 80%
+    And status "passed"
+    And xp_earned adalah 30
+
+  Scenario: Siswa gagal quiz
+    Given siswa "Adi" menjawab 2 dari 5 soal dengan benar
+    When siswa submit jawaban
+    Then pass percentage adalah 40%
+    And status "failed"
+    And xp_earned adalah 0
+
+  Scenario: Ranking ditampilkan
+    Given terdapat 3 peserta yang sudah selesai
+    When siswa melihat hasil
+    Then ranking ditampilkan berdasarkan jumlah benar
+```
+
+### BDD-66 Quick Quiz Anti-Cheat
+```gherkin
+Feature: Quick Quiz Anti-Cheat
+
+  Scenario: Submit jawaban tanpa correct_answer
+    Given siswa "Budi" bergabung ke sesi quiz
+    When soal dikirim ke client
+    Then setiap soal memiliki field: id, question, options, difficulty, order
+    And field correct_answer tidak disertakan
+
+  Scenario: Tidak bisa submit dua kali
+    Given siswa "Budi" sudah submit jawaban
+    When siswa mencoba submit lagi
+    Then sistem menolak dengan pesan "Kamu sudah submit jawaban"
+
+  Scenario: Validasi server-side
+    Given siswa "Budi" mengirim jawaban
+    When server memvalidasi
+    Then jawaban dicocokkan dengan correct_answer di database
+    Dan skor dihitung di server
+```
+
+## Pet System
+
+### BDD-54 Pet Adoption & Evolution
+```gherkin
+Feature: Pet Adoption & Evolution
+  As a siswa
+  I want to memiliki pet yang tumbuh
+  So that saya punya motivasi tambahan
+
+  Scenario: Siswa mendapatkan telur pet
+    Given siswa "Budi" baru mendaftar
+    When siswa menyelesaikan tutorial
+    Then siswa mendapatkan telur pet
+    And telur ditampilkan di dashboard
+
+  Scenario: Pet menetas
+    Given siswa "Budi" memiliki telur pet
+    And total_xp = 100 (level 3)
+    When sistem mengecek evolusi
+    Then telur menetas menjadi baby pet
+    And baby pet bisa bergerak di dashboard
+
+  Scenario: Pet berevolusi ke teen
+    Given siswa "Budi" memiliki baby pet
+    And total_xp = 500 (level 5)
+    When sistem mengecek evolusi
+    Then pet berevolusi menjadi teen pet
+    And fitur aksesori terbuka
+```
+
+### BDD-55 Pet Interaction & Mood
+```gherkin
+Feature: Pet Interaction & Mood
+  As a siswa
+  I want to berinteraksi dengan pet
+  So that pet bahagia
+
+  Scenario: Memberi makan pet
+    Given siswa "Budi" memiliki baby pet dengan hunger = 3
+    When siswa mengklik "Feed"
+    Then hunger pet = 4
+    And happiness pet meningkat +1
+
+  Scenario: Pet bahagia karena login
+    Given siswa "Budi" login hari ini
+    When login tercatat
+    Then happiness pet meningkat +1
+
+  Scenario: Pet sedih karena tidak aktif
+    Given siswa "Budi" tidak login kemarin
+    When sistem mengecek mood pet
+    Then happiness pet berkurang -2
+```
+
+### BDD-56 Pet Accessories & Skills
+```gherkin
+Feature: Pet Accessories & Skills
+  As a siswa
+  I want to memberikan aksesori ke pet
+  So that pet lebih kuat
+
+  Scenario: Equip aksesori ke pet
+    Given siswa "Budi" memiliki teen pet
+    And siswa memiliki aksesori "Topi Cerdas"
+    When siswa mengequip "Topi Cerdas" ke pet
+    Then pet menampilkan topi di dashboard
+    And pet mendapat skill "Study Buddy"
+
+  Scenario: Skill pet aktif saat reading
+    Given pet "Budi" memiliki skill "Study Buddy" (+5% XP)
+    When siswa membaca materi
+    Then XP reading ditambah 5%
+```
+
+## Quest NPC
+
+### BDD-57 Quest NPC Contextual ✅ Implemented
+```gherkin
+Feature: Quest NPC Contextual
+  As a siswa
+  I want to menerima quest dari NPC sesuai materi
+  So that belajar lebih terarah
+
+  Scenario: NPC muncul saat baca materi
+    Given siswa "Budi" membuka materi "HTML Fundamentals"
+    When halaman materi dimuat
+    Then NPC "Pak HTML" muncul dengan 33% encounter rate
+    And quest: "Buat halaman HTML sederhana" (easy, 20 XP)
+
+  Scenario: Siswa menerima quest NPC
+    Given NPC "Pak HTML" menampilkan quest
+    When siswa mengklik "Accept Quest"
+    Then quest masuk ke daftar quest aktif
+    And NPC memberikan hint
+```
+
+### BDD-58 Quest NPC Dialogue & Reward ✅ Implemented
+```gherkin
+Feature: Quest NPC Dialogue & Reward
+  As a siswa
+  I want to berinteraksi dengan NPC dan mendapat reward
+  So that saya termotivasi
+
+  Scenario: Dialog intro NPC
+    Given siswa pertama kali bertemu NPC "Pak HTML"
+    When dialog intro ditampilkan
+    Then NPC berkenalan dengan dialog level 1
+    And NPC menjelaskan quest pertama
+
+  Scenario: Reward dari NPC
+    Given siswa "Budi" menyelesaikan quest NPC
+    When quest selesai
+    Then NPC memberikan dialog celebration
+    And reward: 20 XP
+    And affinity XP +5
+
+  Scenario: NPC buka quest legendary
+    Given affinity level siswa "Budi" dengan NPC = 4
+    When siswa membuka halaman quest NPC
+    Then quest legendary muncul
+    And quest harder tapi reward lebih besar
+
+  Scenario: NPC gallery menampilkan affinity
+    Given siswa membuka halaman /npcs
+    When halaman dimuat
+    Then 3 NPC ditampilkan dengan level affinity
+    And progress bar XP affinity
+
+## Material Reading ✅ Implemented
+
+### BDD-59 Material Reading Points ✅ Implemented
+```gherkin
+Feature: Material Reading Points
+  As a siswa
+  I want to mendapat XP saat membaca materi
+  So that saya termotivasi membaca
+
+  Scenario: First read bonus
+    Given siswa "Budi" membuka materi "CSS Box Model" untuk pertama kali
+    When materi terbuka
+    Then siswa mendapat +5 XP (open bonus)
+    And siswa mendapat +20 XP (first read bonus)
+
+  Scenario: Time bonus
+    Given siswa "Budi" sedang membaca materi
+    When waktu baca mencapai 3 menit
+    Then siswa mendapat +10 XP (time bonus)
+
+  Scenario: Completion bonus
+    Given siswa "Budi" membaca materi
+    When siswa scroll ke akhir materi
+    Then siswa mendapat +5 XP (completion bonus)
+
+  Scenario: Total XP reading
+    Given siswa "Budi" pertama kali baca materi dan selesai
+    When semua bonus dikalkulasi
+    Then total XP = 5 (open) + 20 (first) + 10 (time) + 5 (scroll) = 40 XP
+```
+**Implementation:** `MaterialReadingService::calculateXp()` + `ReadingTracker` component + `POST /materials/{id}/reading/complete`
+
+### BDD-60 Reading Time Tracking ✅ Implemented
+```gherkin
+Feature: Reading Time Tracking
+  As a sistem
+  I want melacak waktu baca siswa
+  So that data akurat
+
+  Scenario: Tracking waktu baca
+    Given siswa "Budi" membuka materi
+    When timestamp buka tercatat
+    And sistem mulai hitung waktu_baca
+    When siswa menutup materi setelah 5 menit
+    Then data dikirim: {material_id, waktu: 300s, scroll_depth: 100%}
+    And data tersimpan di reading_logs
+```
+**Implementation:** `ReadingTracker` component (heartbeat tiap 30 detik) + `reading_logs` table + `POST /materials/{id}/reading/heartbeat`
+
+### BDD-61 Material Reading Quiz ✅ Implemented
+```gherkin
+Feature: Material Reading Quiz
+  As a siswa
+  I want to quiz setelah baca materi
+  So that saya uji pemahaman
+
+  Scenario: Quiz muncul setelah baca
+    Given siswa "Budi" telah baca materi > 3 menit
+    And scroll ke bawah
+    When quiz ditampilkan (3 soal)
+    And siswa menjawab benar 2 dari 3
+    Then siswa mendapat +15 XP bonus
+
+  Scenario: Quiz gagal
+    Given siswa "Budi" menjawab benar kurang dari 2 soal
+    When quiz selesai
+    Then pesan "Coba lagi setelah 10 menit" ditampilkan
+    And siswa dapat mengulang nanti
+```
+**Implementation:** `ReadingQuiz` modal component + `MaterialReadingService::getQuiz()` dan `submitQuiz()` + `ReadingQuizSeeder` (60 soal)
+
+### BDD-62 Reading Anti-Cheat ✅ Implemented
+```gherkin
+Feature: Reading Anti-Cheat
+  As a sistem
+  I want memvalidasi bacaan siswa
+  So that adil
+
+  Scenario: Scroll terlalu cepat
+    Given siswa "Budi" membuka materi
+    When siswa scroll ke bawah dalam < 3 detik per paragraf
+    Then sistem menolak time bonus
+    And hanya open bonus yang diberikan
+
+  Scenario: Deteksi anomali
+    Given siswa "Budi" mengirim data reading
+    When scroll_depth = 100% tapi waktu < 10 detik
+    Then server mencatat anomali
+    And anomali masuk ke log admin
+
+  Scenario: Batas reading per jam
+    Given siswa "Budi" telah membaca 10 materi dalam 1 jam
+    When siswa membuka materi baru
+    Then pesan "Batas reading tercapai, coba lagi nanti" ditampilkan
+    And XP tidak diberikan sampai batas reset
+```
+**Implementation:** `MaterialReadingService::detectAnomalies()` — scroll 80%+ < 10 detik = anomaly, max 10 materi/jam, flags stored in `reading_logs.is_anomaly`

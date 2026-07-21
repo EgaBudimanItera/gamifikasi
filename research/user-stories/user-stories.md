@@ -331,3 +331,209 @@
 - **I want to** mengekspor laporan dalam format CSV/PDF
 - **So that** saya dapat menganalisis data di luar sistem
 - **Priority:** Low
+
+## Battle Quiz PvP (US-41 to US-50)
+
+### US-41 Quick Match Battle
+- **ID:** US-41
+- **FR Ref:** FR-41
+- **As a** siswa
+- **I want to** memulai battle quiz cepat dengan lawan otomatis
+- **So that** saya dapat berkompetisi dengan siswa lain yang selevel
+- **Priority:** High
+
+### US-42 Invite Friend Battle
+- **ID:** US-42
+- **FR Ref:** FR-42
+- **As a** siswa
+- **I want to** mengundang teman untuk battle quiz
+- **So that** saya dapat berkompetisi langsung dengan teman yang saya kenal
+- **Priority:** Medium
+
+### US-43 Battle Gameplay
+- **ID:** US-43
+- **FR Ref:** FR-43
+- **As a** siswa
+- **I want to** menjawab soal battle secara bergantian dengan timer
+- **So that** battle terasa seru dan kompetitif
+- **Priority:** High
+
+### US-44 Battle Result & Reward
+- **ID:** US-44
+- **FR Ref:** FR-44
+- **As a** siswa
+- **I want to** melihat hasil battle dan mendapatkan reward XP
+- **So that** saya tahu siapa yang menang dan mendapat penghargaan
+- **Priority:** High
+
+### US-45 Battle History
+- **ID:** US-45
+- **FR Ref:** FR-45
+- **As a** siswa
+- **I want to** melihat riwayat battle saya
+- **So that** saya dapat melacak perkembangan performa battle saya
+- **Priority:** Medium
+
+### US-46 Battle Leaderboard
+- **ID:** US-46
+- **FR Ref:** FR-46
+- **As a** siswa
+- **I want to** melihat peringkat battle di kelas dan sekolah
+- **So that** saya termotivasi untuk memenangkan lebih banyak battle
+- **Priority:** Medium
+
+### US-47 Battle Badge
+- **ID:** US-47
+- **FR Ref:** FR-47
+- **As a** siswa
+- **I want to** mendapatkan badge pencapaian battle
+- **So that** saya memiliki penghargaan atas prestasi battle saya
+- **Priority:** Medium
+
+### US-48 Teacher Battle Statistics
+- **ID:** US-48
+- **FR Ref:** FR-48
+- **As a** guru
+- **I want to** melihat statistik battle quiz siswa
+- **So that** saya dapat mengevaluasi engagement dan pemahaman siswa melalui battle
+- **Priority:** Medium
+
+### US-49 Question Bank Management
+- **ID:** US-49
+- **FR Ref:** FR-49
+- **As a** guru
+- **I want to** membuat dan mengelola bank soal battle quiz
+- **So that** soal battle bervariasi dan sesuai kurikulum
+- **Priority:** High
+
+### US-50 Battle Timer & Anti-Cheat
+- **ID:** US-50
+- **FR Ref:** FR-50
+- **As a** sistem
+- **I want to** memvalidasi jawaban di server dengan timer
+- **So that** battle adil dan tidak bisa dimanipulasi
+- **Priority:** High
+
+## Quick Quiz Liga (US-63 to US-66)
+
+### US-63 Quick Quiz Session Management
+- **ID:** US-63
+- **FR Ref:** FR-63
+- **As a** guru
+- **I want to** membuat sesi quiz cepat untuk kelas atau guild
+- **So that** siswa memiliki tantangan kompetitif yang terstruktur
+- **Priority:** High
+
+### US-64 Quick Quiz Participation & Timer
+- **ID:** US-64
+- **FR Ref:** FR-64
+- **As a** siswa
+- **I want to** bergabung ke sesi quiz dan menjawab soal dengan batas waktu
+- **So that** saya dapat berkompetisi dengan siswa lain secara fair
+- **Priority:** High
+
+### US-65 Quick Quiz Scoring & Ranking
+- **ID:** US-65
+- **FR Ref:** FR-65
+- **As a** siswa
+- **I want to** melihat skor dan ranking saya setelah quiz selesai
+- **So that** saya tahu posisi saya dibandingkan peserta lain
+- **Priority:** High
+
+### US-66 Quick Quiz Anti-Cheat
+- **ID:** US-66
+- **FR Ref:** FR-66
+- **As a** sistem
+- **I want to** mencegah kecurangan dalam quick quiz
+- **So that** kompetisi berjalan fair untuk semua peserta
+- **Priority:** High
+
+## Pet System (US-54 to US-56)
+
+### US-54 Pet Adoption & Evolution
+- **ID:** US-54
+- **FR Ref:** FR-54
+- **As a** siswa
+- **I want to** memiliki pet yang tumbuh seiring progres belajar saya
+- **So that** saya punya motivasi tambahan dan teman belajar
+- **Priority:** High
+
+### US-55 Pet Interaction & Mood
+- **ID:** US-55
+- **FR Ref:** FR-55
+- **As a** siswa
+- **I want to** berinteraksi dengan pet saya (memberi makan, bermain)
+- **So that** pet saya bahagia dan memberikan bonus
+- **Priority:** Medium
+
+### US-56 Pet Accessories & Skills
+- **ID:** US-56
+- **FR Ref:** FR-56
+- **As a** siswa
+- **I want to** memberikan aksesori dan skill ke pet saya
+- **So that** pet saya lebih kuat dan berpenampilan menarik
+- **Priority:** Medium
+
+## Quest NPC (US-57 to US-58) ✅ Implemented
+
+### US-57 Quest NPC Contextual ✅ Implemented
+- **ID:** US-57
+- **FR Ref:** FR-57
+- **As a** siswa
+- **I want to** menerima quest dari NPC yang sesuai dengan materi yang saya pelajari
+- **So that** belajar lebih terarah dan menyenangkan
+- **Priority:** High
+- **Status:** ✅ Implemented
+- **Implementation:** 3 NPCs seeded (Pak HTML, Bu Database, Profesor Algo), 30 quests, encounter rate 33% on materials page, NpcChatBubble component shows encounter + quest modal
+
+### US-58 Quest NPC Dialogue & Reward ✅ Implemented
+- **ID:** US-58
+- **FR Ref:** FR-58
+- **As a** siswa
+- **I want to** berinteraksi dengan NPC dan mendapat reward eksklusif
+- **So that** saya merasa dekat dengan NPC dan termotivasi menyelesaikan quest
+- **Priority:** Medium
+- **Status:** ✅ Implemented
+- **Implementation:** 5-level affinity system (Mentor Affinity Score) (Stranger→Acquaintance→Friend→Trusted→Master), XP thresholds [5,15,30,50], NPC gallery page `/npcs`, dynamic dialog per level
+
+## Material Reading (US-59 to US-62)
+
+### US-59 Material Reading Points ✅ Implemented
+- **ID:** US-59
+- **FR Ref:** FR-59
+- **As a** siswa
+- **I want to** mendapat XP saat membaca materi pembelajaran
+- **So that** saya termotivasi untuk benar-benar membaca materi
+- **Priority:** High
+- **Status:** ✅ Implemented
+- **Implementation:** Frontend `ReadingTracker` component + backend `MaterialReadingService::completeReading()` — siswa klik "Baca Materi & Dapatkan XP", timer berjalan, XP dihitung saat selesai
+
+### US-60 Reading Time Tracking ✅ Implemented
+- **ID:** US-60
+- **FR Ref:** FR-60
+- **As a** sistem
+- **I want to** melacak waktu baca siswa per materi
+- **So that** data engagement siswa terukur dan akurat
+- **Priority:** High
+- **Status:** ✅ Implemented
+- **Implementation:** `ReadingTracker` component mengirim heartbeat tiap 30 detik, data disimpan di `reading_logs` table, scroll depth tracked
+
+### US-61 Material Reading Quiz ✅ Implemented
+- **ID:** US-61
+- **FR Ref:** FR-61
+- **As a** siswa
+- **I want to** mengerjakan quiz singkat setelah membaca materi
+- **So that** saya dapat menguji pemahaman dan mendapat bonus XP
+- **Priority:** Medium
+- **Status:** ✅ Implemented
+- **Implementation:** Frontend `ReadingQuiz` modal component — quiz muncul otomatis setelah reading complete, 3 soal acak, pass threshold 2/3, +15 XP jika lulus
+
+### US-62 Reading Anti-Cheat ✅ Implemented
+- **ID:** US-62
+- **FR Ref:** FR-62
+- **As a** sistem
+- **I want to** memvalidasi bahwa siswa benar-benar membaca materi
+- **So that** XP reading didapatkan secara adil
+- **Priority:** High
+- **Status:** ✅ Implemented
+- **Implementation:** `MaterialReadingService::detectAnomalies()` — anomali jika scroll 80%+ < 10 detik atau > 10 materi/jam, XP bonus ditolak jika anomali

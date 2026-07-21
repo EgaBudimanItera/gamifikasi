@@ -1,4 +1,4 @@
-# User Engagement Questionnaire (UEQ-Adapted)
+# Gamification Engagement Questionnaire
 
 ## Instrumen Engagement untuk Evaluasi EduQuest
 
@@ -14,55 +14,55 @@ Evaluasi aspek keterlibatan (engagement) Anda saat menggunakan EduQuest. Berikan
 
 ---
 
-### Skala A: Attention & Focus (Perhatian & Fokus)
+### Skala A: Competition (Kompetisi)
 
 | No | Pernyataan | 1 | 2 | 3 | 4 | 5 |
 |----|-----------|---|---|---|---|---|
-| 1 | Saya sangat fokus saat menggunakan sistem ini | ☐ | ☐ | ☐ | ☐ | ☐ |
-| 2 | Saya tidak menyadari waktu berlalu saat menggunakan sistem | ☐ | ☐ | ☐ | ☐ | ☐ |
-| 3 | Saya terganggu oleh hal lain saat menggunakan sistem ini (R) | ☐ | ☐ | ☐ | ☐ | ☐ |
-| 4 | Saya memperhatikan setiap detail pada antarmuka sistem | ☐ | ☐ | ☐ | ☐ | ☐ |
-| 5 | Saya mudah kehilangan fokus saat menggunakan sistem ini (R) | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 1 | Leaderboard mendorong saya untuk belajar lebih giat | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 2 | Saya ingin naik peringkat di leaderboard | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 3 | Quick Quiz Liga memberikan tantangan kompetisi yang menarik | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 4 | Saya merasa termotivasi ketika melihat peringkat saya naik | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 5 | Kompetisi sehat dengan siswa lain membuat saya lebih aktif belajar | ☐ | ☐ | ☐ | ☐ | ☐ |
 
-### Skala B: Enjoyment (Kesenangan)
-
-| No | Pernyataan | 1 | 2 | 3 | 4 | 5 |
-|----|-----------|---|---|---|---|---|
-| 6 | Saya menikmati pengalaman menggunakan sistem ini | ☐ | ☐ | ☐ | ☐ | ☐ |
-| 7 | Saya merasa senang saat menggunakan sistem ini | ☐ | ☐ | ☐ | ☐ | ☐ |
-| 8 | Saya merasa bosan saat menggunakan sistem ini (R) | ☐ | ☐ | ☐ | ☐ | ☐ |
-| 9 | Saya merasa frustrasi saat menggunakan sistem ini (R) | ☐ | ☐ | ☐ | ☐ | ☐ |
-| 10 | Saya ingin menggunakan sistem ini lagi di masa depan | ☐ | ☐ | ☐ | ☐ | ☐ |
-
-### Skala C: Gamification Effectiveness (Efektivitas Gamifikasi)
+### Skala B: Collaboration (Kolaborasi)
 
 | No | Pernyataan | 1 | 2 | 3 | 4 | 5 |
 |----|-----------|---|---|---|---|---|
-| 11 | Sistem XP dan level memotivasi saya untuk belajar lebih giat | ☐ | ☐ | ☐ | ☐ | ☐ |
-| 12 | Badge memberikan rasa pencapaian bagi saya | ☐ | ☐ | ☐ | ☐ | ☐ |
-| 13 | Leaderboard mendorong saya untuk bersaing secara sehat | ☐ | ☐ | ☐ | ☐ | ☐ |
-| 14 | Streak harian membuat saya konsisten login setiap hari | ☐ | ☐ | ☐ | ☐ | ☐ |
-| 15 | Quest memberikan tantangan yang menarik bagi saya | ☐ | ☐ | ☐ | ☐ | ☐ |
-| 16 | Saya merasa lebih termotivasi belajar dengan adanya gamifikasi | ☐ | ☐ | ☐ | ☐ | ☐ |
-| 17 | Fitur gamifikasi membuat pembelajaran lebih menyenangkan | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 6 | Saya merasa senang berkontribusi ke guild saya | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 7 | Guild memberikan rasa kebersamaan dalam belajar | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 8 | Saya termotivasi untuk membantu anggota guild lain | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 9 | Guild Quest membuat saya bekerja sama dengan teman | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 10 | Kontribusi XP ke guild memberikan rasa tanggung jawab bersama | ☐ | ☐ | ☐ | ☐ | ☐ |
 
-### Skala D: Behavioral Engagement (Keterlibatan Perilaku)
+### Skala C: Narrative Attachment (Ikatan Naratif)
 
 | No | Pernyataan | 1 | 2 | 3 | 4 | 5 |
 |----|-----------|---|---|---|---|---|
-| 18 | Saya lebih sering login ke sistem dibandingkan sebelumnya | ☐ | ☐ | ☐ | ☐ | ☐ |
-| 19 | Saya lebih cepat menyelesaikan tugas dibandingkan sebelumnya | ☐ | ☐ | ☐ | ☐ | ☐ |
-| 20 | Saya aktif menyelesaikan quest yang tersedia | ☐ | ☐ | ☐ | ☐ | ☐ |
-| 21 | Saya memantau leaderboard secara rutin | ☐ | ☐ | ☐ | ☐ | ☐ |
-| 22 | Saya mencoba mendapatkan semua badge yang tersedia | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 11 | NPC Mentor membuat pengalaman belajar lebih personal | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 12 | Saya merasa memiliki hubungan dengan mentor virtual saya | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 13 | Quest dari NPC Mentor terasa lebih menarik dan kontekstual | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 14 | Saya ingin meningkatkan hubungan saya dengan NPC Mentor | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 15 | NPC Mentor memberikan pengalaman belajar yang berbeda dari biasanya | ☐ | ☐ | ☐ | ☐ | ☐ |
+
+### Skala D: Exploration (Eksplorasi)
+
+| No | Pernyataan | 1 | 2 | 3 | 4 | 5 |
+|----|-----------|---|---|---|---|---|
+| 16 | Saya ingin mengeksplorasi semua materi yang tersedia | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 17 | Saya penasaran dengan quest baru yang muncul | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 18 | Saya aktif mencari materi bacaan baru | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 19 | Saya ingin menyelesaikan semua quest yang ada | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 20 | Sistem gamifikasi membuat saya ingin belajar lebih banyak | ☐ | ☐ | ☐ | ☐ | ☐ |
 
 ### Skala E: Continued Intention (Niat Berkelanjutan)
 
 | No | Pernyataan | 1 | 2 | 3 | 4 | 5 |
 |----|-----------|---|---|---|---|---|
-| 23 | Saya akan terus menggunakan sistem ini | ☐ | ☐ | ☐ | ☐ | ☐ |
-| 24 | Saya akan merekomendasikan sistem ini kepada teman | ☐ | ☐ | ☐ | ☐ | ☐ |
-| 25 | Saya berharap sistem ini terus dikembangkan | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 21 | Saya akan terus menggunakan sistem ini | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 22 | Saya akan merekomendasikan sistem ini kepada teman | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 23 | Saya berharap sistem ini terus dikembangkan | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 24 | Saya merasa sistem ini membantu saya belajar lebih baik | ☐ | ☐ | ☐ | ☐ | ☐ |
+| 25 | Saya ingin menggunakan fitur gamifikasi ini di mata pelajaran lain | ☐ | ☐ | ☐ | ☐ | ☐ |
 
 ---
 
@@ -75,4 +75,4 @@ Evaluasi aspek keterlibatan (engagement) Anda saat menggunakan EduQuest. Berikan
 ### Target Penelitian
 - Engagement Score > 3.5 dari 5.0
 - Peningkatan engagement signifikan (p < 0.05)
-- Evaluasi komparatif: Kelas dengan gamifikasi vs tanpa gamifikasi
+- Setiap dimensi (Competition, Collaboration, Narrative Attachment, Exploration, Continued Intention) dinilai secara terpisah

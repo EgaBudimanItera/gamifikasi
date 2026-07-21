@@ -2,7 +2,7 @@
 
 ## Product Overview
 
-EduQuest adalah platform pembelajaran berbasis web yang menerapkan gamifikasi untuk meningkatkan motivasi, keterlibatan, dan ketepatan penyelesaian tugas siswa SMA/SMK pada Kurikulum Merdeka.
+EduQuest adalah platform pembelajaran berbasis web yang menerapkan gamifikasi untuk meningkatkan motivasi, keterlibatan, dan ketepatan penyelesaian tugas siswa SMP kelas VII pada Kurikulum Merdeka.
 
 Produk ini dikembangkan sebagai artefak penelitian untuk tesis Magister Rekayasa Perangkat Lunak dengan fokus pada Requirement Engineering, User Story, dan Behavior-Driven Development (BDD).
 

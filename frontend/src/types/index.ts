@@ -248,3 +248,131 @@ export interface PaginatedResponse<T> {
     total: number;
   };
 }
+
+export interface ReadingLog {
+  id: number;
+  user_id: number;
+  material_id: number;
+  started_at: string;
+  duration_seconds: number;
+  scroll_depth: number;
+  is_completed: boolean;
+  xp_earned: number;
+  is_anomaly: boolean;
+  anomaly_reason: string | null;
+  material?: {
+    id: number;
+    title: string;
+  };
+}
+
+export interface ReadingQuiz {
+  id: number;
+  question: string;
+  options: string[];
+  difficulty: 'easy' | 'medium' | 'hard';
+}
+
+export interface ReadingQuizAttempt {
+  attempt_id: number;
+  total_questions: number;
+  correct_answers: number;
+  passed: boolean;
+  xp_earned: number;
+}
+
+export interface ReadingStats {
+  total_materials_read: number;
+  total_xp_earned: number;
+  total_reading_time_seconds: number;
+  total_quiz_attempts: number;
+  passed_quizzes: number;
+  recent_logs: ReadingLog[];
+}
+
+export interface Npc {
+  id: number;
+  subject_id: number;
+  name: string;
+  personality: string;
+  avatar_url: string | null;
+  dialogs: Record<string, string>;
+  is_active: boolean;
+  subject?: {
+    id: number;
+    name: string;
+  };
+}
+
+export interface NpcQuest {
+  id: number;
+  question: string;
+  options: string[];
+  difficulty: 'easy' | 'medium' | 'hard' | 'legendary';
+  xp_reward: number;
+}
+
+export interface NpcEncounter {
+  npc: Npc;
+  affinity: {
+    id: number;
+    affinity_level: number;
+    affinity_xp: number;
+  };
+  dialog: string;
+  has_quest: boolean;
+}
+
+export interface NpcAffinity {
+  npc: Npc;
+  affinity_level: number;
+  affinity_xp: number;
+  total_quests_completed: number;
+  last_interaction_at: string | null;
+  xp_to_next_level: number;
+}
+
+export interface QuickQuizSession {
+  id: number;
+  title: string;
+  mode: 'class' | 'guild';
+  difficulty: 'easy' | 'hard';
+  duration_minutes: number;
+  questions_count: number;
+  xp_reward: number;
+  pass_threshold: number;
+  status: 'active' | 'completed' | 'cancelled';
+  starts_at: string;
+  ends_at: string;
+  time_remaining?: number;
+  creator_name?: string;
+  class_name?: string | null;
+  guild_name?: string | null;
+  participant_count?: number;
+}
+
+export interface QuickQuizQuestion {
+  id: number;
+  npc_quest_id: number | null;
+  question: string;
+  options: string[];
+  difficulty: 'easy' | 'medium' | 'hard' | 'legendary';
+  order: number;
+}
+
+export interface QuickQuizParticipant {
+  id: number;
+  user_id: number;
+  correct_count: number;
+  total_questions: number;
+  xp_earned: number;
+  status: 'in_progress' | 'completed' | 'timeout';
+  completed_at: string | null;
+  rank?: number;
+  user?: User;
+}
+
+export interface QuickQuizJoinResult {
+  session: QuickQuizSession;
+  questions: QuickQuizQuestion[];
+}

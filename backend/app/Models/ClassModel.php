@@ -27,7 +27,7 @@ class ClassModel extends Model
 
     public function students(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'student_classes');
+        return $this->belongsToMany(User::class, 'student_classes', 'class_id', 'user_id');
     }
 
     public function classSubjects(): HasMany
